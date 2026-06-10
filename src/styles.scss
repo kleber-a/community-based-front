@@ -1,1 +1,87 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+	color-scheme: dark;
+	--app-bg: #07101d;
+	--surface: rgba(11, 21, 38, 0.94);
+	--surface-strong: rgba(8, 18, 34, 0.98);
+	--border-color: rgba(210, 225, 255, 0.12);
+	--sidebar-bg: linear-gradient(180deg, rgba(8, 18, 34, 0.96), rgba(6, 14, 28, 0.99));
+	--sidebar-card-bg: rgba(255, 255, 255, 0.03);
+	--sidebar-card-border: rgba(255, 255, 255, 0.06);
+	--sidebar-hover-bg: rgba(255, 255, 255, 0.05);
+	--sidebar-active-bg: rgba(243, 198, 35, 0.18);
+	--sidebar-user-border: rgba(255, 255, 255, 0.08);
+	--brand: #1f5fbf;
+	--brand-strong: #123f8a;
+	--accent: #f3c623;
+	--accent-soft: rgba(243, 198, 35, 0.14);
+	--text-primary: #f8fbff;
+	--text-secondary: #d7e0ef;
+	--text-muted: #9fb0cb;
+	--shadow-soft: 0 24px 48px rgba(0, 0, 0, 0.32);
+}
+
+:root[data-theme='light'] {
+	color-scheme: light;
+	--app-bg: #edf4ff;
+	--surface: rgba(255, 255, 255, 0.92);
+	--surface-strong: rgba(245, 249, 255, 0.98);
+	--border-color: rgba(16, 36, 72, 0.1);
+	--sidebar-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(243, 247, 255, 0.98));
+	--sidebar-card-bg: rgba(255, 255, 255, 0.75);
+	--sidebar-card-border: rgba(16, 36, 72, 0.08);
+	--sidebar-hover-bg: rgba(24, 85, 184, 0.08);
+	--sidebar-active-bg: rgba(224, 180, 0, 0.18);
+	--sidebar-user-border: rgba(16, 36, 72, 0.1);
+	--brand: #1855b8;
+	--brand-strong: #123f8a;
+	--accent: #e0b400;
+	--accent-soft: rgba(224, 180, 0, 0.14);
+	--text-primary: #0d1b34;
+	--text-secondary: #40506c;
+	--text-muted: #63738c;
+	--shadow-soft: 0 18px 34px rgba(30, 58, 95, 0.12);
+}
+
+html {
+	min-height: 100%;
+	background: var(--app-bg);
+}
+
+body {
+	min-height: 100vh;
+	margin: 0;
+	background: var(--app-bg);
+	color: var(--text-primary);
+	font-family:
+		Inter,
+		"Segoe UI",
+		-apple-system,
+		BlinkMacSystemFont,
+		"Helvetica Neue",
+		Arial,
+		sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+	background: var(--accent);
+	color: #07101d;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+button,
+a {
+	font: inherit;
+}
+
+button {
+	cursor: pointer;
+}
+
+svg {
+	display: block;
+}
