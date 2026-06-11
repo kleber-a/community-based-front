@@ -27,44 +27,47 @@ type DemandCard = {
 			actionIcon="+"
 		/> -->
 
-		<section class="demand-toolbar" aria-label="Filtros de demandas">
-			<div class="demand-tabs" role="tablist" aria-label="Status das demandas">
-				@for (tab of statusTabs; track tab) {
-					<button type="button" class="demand-tab" [class.is-active]="tab === activeTab">
-						{{ tab }}
-					</button>
-				}
-			</div>
+    <div class="page-content">
 
-			<label class="status-select">
-				<select aria-label="Filtrar por status">
-					@for (option of statusFilterOptions; track option) {
-						<option>{{ option }}</option>
-					}
-				</select>
-			</label>
-		</section>
+      <section class="demand-toolbar" aria-label="Filtros de demandas">
+        <div class="demand-tabs" role="tablist" aria-label="Status das demandas">
+          @for (tab of statusTabs; track tab) {
+            <button type="button" class="demand-tab" [class.is-active]="tab === activeTab">
+              {{ tab }}
+            </button>
+          }
+        </div>
 
-		<section class="demand-grid">
-			@for (demand of filteredDemands; track demand.title) {
-				<article class="demand-card">
-					<div class="demand-card__top">
-						<div class="demand-card__icon" aria-hidden="true">{{ demand.icon }}</div>
-						<span class="demand-status" [class.status--open]="demand.statusClass === 'status--open'" [class.status--progress]="demand.statusClass === 'status--progress'" [class.status--done]="demand.statusClass === 'status--done'">{{ demand.status }}</span>
-					</div>
+        <label class="status-select">
+          <select aria-label="Filtrar por status">
+            @for (option of statusFilterOptions; track option) {
+              <option>{{ option }}</option>
+            }
+          </select>
+        </label>
+      </section>
 
-					<h2>{{ demand.title }}</h2>
-					<p class="demand-meta">{{ demand.neighborhood }} · {{ demand.area }}</p>
+      <section class="demand-grid">
+        @for (demand of filteredDemands; track demand.title) {
+          <article class="demand-card">
+            <div class="demand-card__top">
+              <div class="demand-card__icon" aria-hidden="true">{{ demand.icon }}</div>
+              <span class="demand-status" [class.status--open]="demand.statusClass === 'status--open'" [class.status--progress]="demand.statusClass === 'status--progress'" [class.status--done]="demand.statusClass === 'status--done'">{{ demand.status }}</span>
+            </div>
 
-					<div class="demand-tags">
-						<span class="tag">{{ demand.department }}</span>
-						<span class="tag tag--deadline">Prazo: {{ demand.deadline }}</span>
-					</div>
+            <h2>{{ demand.title }}</h2>
+            <p class="demand-meta">{{ demand.neighborhood }} · {{ demand.area }}</p>
 
-					<button type="button" class="advance-button">Avançar status</button>
-				</article>
-			}
-		</section>
+            <div class="demand-tags">
+              <span class="tag">{{ demand.department }}</span>
+              <span class="tag tag--deadline">Prazo: {{ demand.deadline }}</span>
+            </div>
+
+            <button type="button" class="advance-button">Avançar status</button>
+          </article>
+        }
+      </section>
+    </div>
   `,
 	styles: [`
 		:host {

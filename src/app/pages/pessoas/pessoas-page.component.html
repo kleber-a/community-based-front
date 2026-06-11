@@ -1,0 +1,128 @@
+<!-- <div class="pessoas-page">
+
+        <app-page-header
+          kicker="Pessoas da Comunidade"
+          title="Pessoas da Comunidade"
+          subtitle="Cadastro e classificação do eleitorado"
+          actionLabel="Cadastrar"
+          actionIcon="+"
+        />
+
+        <section class="page-filters">
+          <label class="search-field">
+            <span class="search-field__icon" aria-hidden="true">⌕</span>
+            <input type="search" placeholder="Buscar por nome ou telefone..." />
+          </label>
+
+          <select aria-label="Filtro de apoio">
+            @for (option of supportFilterOptions; track option) {
+              <option>{{ option }}</option>
+            }
+          </select>
+
+          <select aria-label="Filtro de atividades">
+            @for (option of activityFilterOptions; track option) {
+              <option>{{ option }}</option>
+            }
+          </select>
+        </section>
+
+        <section class="table-card">
+          <table>
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Telefone</th>
+                <th>Bairro</th>
+                <th>Apoio</th>
+                <th>Atividades</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (person of peopleMock; track person.name) {
+                <tr>
+                  <td>{{ person.name }}</td>
+                  <td>{{ person.phone }}</td>
+                  <td>{{ person.neighborhood }}</td>
+                  <td><span class="tag" [class.tag--supporter]="person.supportClass === 'tag--supporter'" [class.tag--indeciso]="person.supportClass === 'tag--indeciso'" [class.tag--muted]="person.supportClass === 'tag--muted'">{{ person.support }}</span></td>
+                  <td>
+                    @for (activity of person.activities; track activity) {
+                      <span class="tag">{{ activity }}</span>
+                    }
+                    @if (!person.activities.length) {
+                      <span class="tag tag--muted">—</span>
+                    }
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </section>
+
+  </div> -->
+
+
+  <div class="pessoas-page">
+
+  <app-page-header
+    kicker="Pessoas da Comunidade"
+    title="Pessoas da Comunidade"
+    subtitle="Cadastro e classificação do eleitorado"
+    actionLabel="Cadastrar"
+    actionIcon="+"
+    (actionClick)="openCadastro()"
+  />
+
+  <div class="page-content">
+    <section class="page-filters">
+      <label class="search-field">
+        <span class="search-field__icon" aria-hidden="true">⌕</span>
+        <input type="search" placeholder="Buscar por nome ou telefone..." />
+      </label>
+
+      <select aria-label="Filtro de atividades">
+        @for (option of activityFilterOptions; track option) {
+          <option>{{ option }}123</option>
+        }
+      </select>
+    </section>
+
+    <section class="table-card">
+      <table>
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Telefone</th>
+            <th>Bairro</th>
+            <th>Atividades</th>
+            <th aria-label="Ações"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (person of peopleMock; track person.name) {
+            <tr class="row--clickable" (click)="openModal(person)">
+              <td>{{ person.name }}</td>
+              <td>{{ person.phone }}</td>
+              <td>{{ person.neighborhood }}</td>
+              <td>
+                @for (activity of person.activities; track activity) {
+                  <span class="tag">{{ activity }}</span>
+                }
+                @if (!person.activities.length) {
+                  <span class="tag tag--muted">—</span>
+                }
+              </td>
+              <td class="col-action">
+                <button class="btn-detail" [attr.aria-label]="'Ver detalhes de ' + person.name">
+                  →
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </section>
+  </div>
+
+
+</div>

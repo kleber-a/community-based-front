@@ -1,0 +1,148 @@
+<div class="modal-overlay" (click)="onOverlayClick($event)">
+  <div class="modal" role="dialog" aria-modal="true" [attr.aria-label]="data.name">
+
+    <header class="modal-header">
+      <div class="modal-header__meta">
+        <span class="modal-header__kicker">Pessoa da Comunidade</span>
+        <h2 class="modal-header__name">{{ data.name }}</h2>
+      </div>
+      <button class="modal-close" (click)="close()" aria-label="Fechar">✕</button>
+    </header>
+
+    <div class="modal-body">
+
+      <!-- DADOS PESSOAIS -->
+      <section class="modal-section">
+        <h3 class="modal-section__title">Dados Pessoais</h3>
+        <div class="modal-grid">
+          <div class="modal-field">
+            <span class="modal-field__label">Data de Nascimento</span>
+            <span class="modal-field__value">{{ data.birthDate || '—' }}</span>
+          </div>
+          <div class="modal-field">
+            <span class="modal-field__label">Telefone</span>
+            <span class="modal-field__value">{{ data.phone || '—' }}</span>
+          </div>
+          <div class="modal-field">
+            <span class="modal-field__label">Facebook</span>
+            <span class="modal-field__value">{{ data.facebook || '—' }}</span>
+          </div>
+          <div class="modal-field">
+            <span class="modal-field__label">Instagram</span>
+            <span class="modal-field__value">{{ data.instagram || '—' }}</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ENDEREÇO -->
+      <section class="modal-section">
+        <h3 class="modal-section__title">Endereço</h3>
+        <div class="modal-grid">
+          <div class="modal-field modal-field--wide">
+            <span class="modal-field__label">Endereço</span>
+            <span class="modal-field__value">{{ data.address || '—' }}</span>
+          </div>
+          <div class="modal-field">
+            <span class="modal-field__label">Ponto de Referência</span>
+            <span class="modal-field__value">{{ data.reference || '—' }}</span>
+          </div>
+          <div class="modal-field">
+            <span class="modal-field__label">Bairro</span>
+            <span class="modal-field__value">{{ data.neighborhood || '—' }}</span>
+          </div>
+          <div class="modal-field">
+            <span class="modal-field__label">Cidade</span>
+            <span class="modal-field__value">{{ data.city || '—' }}</span>
+          </div>
+          <div class="modal-field">
+            <span class="modal-field__label">UF</span>
+            <span class="modal-field__value">{{ data.uf || '—' }}</span>
+          </div>
+          <div class="modal-field">
+            <span class="modal-field__label">CEP</span>
+            <span class="modal-field__value">{{ data.cep || '—' }}</span>
+          </div>
+          <div class="modal-field">
+            <span class="modal-field__label">Comunidade</span>
+            <span class="modal-field__value">{{ data.community || '—' }}</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- DADOS ELEITORAIS -->
+      <section class="modal-section">
+        <h3 class="modal-section__title">Dados Eleitorais</h3>
+        <div class="modal-grid">
+          <div class="modal-field">
+            <span class="modal-field__label">Local de Votação</span>
+            <span class="modal-field__value">{{ data.pollingPlace || '—' }}</span>
+          </div>
+          <div class="modal-field">
+            <span class="modal-field__label">Título de Eleitor</span>
+            <span class="modal-field__value">{{ data.voterTitle || '—' }}</span>
+          </div>
+          <div class="modal-field">
+            <span class="modal-field__label">Zona</span>
+            <span class="modal-field__value">{{ data.zone || '—' }}</span>
+          </div>
+          <div class="modal-field">
+            <span class="modal-field__label">Seção</span>
+            <span class="modal-field__value">{{ data.section || '—' }}</span>
+          </div>
+          <div class="modal-field">
+            <span class="modal-field__label">Coordenador</span>
+            <span class="modal-field__value">{{ data.coordinator || '—' }}</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ATIVIDADES -->
+      <section class="modal-section">
+        <h3 class="modal-section__title">Atividades</h3>
+
+        <div class="modal-field modal-field--wide">
+          <span class="modal-field__label">
+            Atividades cadastradas
+          </span>
+
+          <div class="activities-container">
+
+            @if (data.activities?.length) {
+
+              <div class="tag-list">
+                @for (activity of data.activities; track activity) {
+                  <span class="activity-tag">
+                    {{ activity }}
+                  </span>
+                }
+              </div>
+
+            } @else {
+
+              <div class="empty-state">
+                Nenhuma atividade cadastrada
+              </div>
+
+            }
+
+          </div>
+        </div>
+      </section>
+
+      <!-- OBSERVAÇÕES -->
+      @if (data.obs) {
+        <section class="modal-section">
+          <h3 class="modal-section__title">Observações</h3>
+          <p class="modal-obs">{{ data.obs }}</p>
+        </section>
+      }
+
+    </div>
+
+    <footer class="modal-footer">
+      <button class="btn btn--ghost" (click)="close()">Fechar</button>
+      <button class="btn btn--primary">Editar cadastro</button>
+    </footer>
+
+  </div>
+</div>

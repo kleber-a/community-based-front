@@ -23,65 +23,66 @@ type BairroRanking = {
 			actionLabel="Nova marcação"
 			actionIcon="+"
 		/> -->
+    <div class="page-content">
+      <section class="map-toolbar" aria-label="Camadas do mapa">
+        <div class="map-tabs" role="tablist" aria-label="Visões do mapa">
+          @for (tab of mapTabs; track tab) {
+            <button type="button" class="map-tab" [class.is-active]="tab === activeTab">{{ tab }}</button>
+          }
+        </div>
+      </section>
 
-		<section class="map-toolbar" aria-label="Camadas do mapa">
-			<div class="map-tabs" role="tablist" aria-label="Visões do mapa">
-				@for (tab of mapTabs; track tab) {
-					<button type="button" class="map-tab" [class.is-active]="tab === activeTab">{{ tab }}</button>
-				}
-			</div>
-		</section>
+      <section class="map-layout">
+        <article class="map-card">
+          <div class="map-frame" aria-label="Mapa de apoio com bolhas de concentração">
+            <div class="map-control map-control--top">+</div>
+            <div class="map-control map-control--bottom">−</div>
 
-		<section class="map-layout">
-			<article class="map-card">
-				<div class="map-frame" aria-label="Mapa de apoio com bolhas de concentração">
-					<div class="map-control map-control--top">+</div>
-					<div class="map-control map-control--bottom">−</div>
+            <span class="map-label map-label--left">A&ccedil;O LOUREN&Ccedil;O DA MATA</span>
+            <span class="map-label map-label--center">CAMARAGIBE</span>
+            <span class="map-label map-label--right">OLINDA</span>
+            <span class="map-label map-label--recife">RECIFE</span>
 
-					<span class="map-label map-label--left">A&ccedil;O LOUREN&Ccedil;O DA MATA</span>
-					<span class="map-label map-label--center">CAMARAGIBE</span>
-					<span class="map-label map-label--right">OLINDA</span>
-					<span class="map-label map-label--recife">RECIFE</span>
+            <div class="map-bubble bubble--xl" style="top: 74%; left: 34%;"></div>
+            <div class="map-bubble bubble--lg" style="top: 81%; left: 32%;"></div>
+            <div class="map-bubble bubble--lg" style="top: 18%; left: 61%;"></div>
+            <div class="map-bubble bubble--md" style="top: 36%; left: 58%;"></div>
+            <div class="map-bubble bubble--md" style="top: 39%; left: 51%;"></div>
+            <div class="map-bubble bubble--md" style="top: 53%; left: 41%;"></div>
+            <div class="map-bubble bubble--sm" style="top: 29%; left: 59%;"></div>
+            <div class="map-bubble bubble--sm" style="top: 22%; left: 59%;"></div>
+            <div class="map-bubble bubble--sm" style="top: 54%; left: 18%;"></div>
+            <div class="map-bubble bubble--sm" style="top: 85%; left: 59%;"></div>
+            <div class="map-bubble bubble--sm" style="top: 92%; left: 52%;"></div>
+          </div>
 
-					<div class="map-bubble bubble--xl" style="top: 74%; left: 34%;"></div>
-					<div class="map-bubble bubble--lg" style="top: 81%; left: 32%;"></div>
-					<div class="map-bubble bubble--lg" style="top: 18%; left: 61%;"></div>
-					<div class="map-bubble bubble--md" style="top: 36%; left: 58%;"></div>
-					<div class="map-bubble bubble--md" style="top: 39%; left: 51%;"></div>
-					<div class="map-bubble bubble--md" style="top: 53%; left: 41%;"></div>
-					<div class="map-bubble bubble--sm" style="top: 29%; left: 59%;"></div>
-					<div class="map-bubble bubble--sm" style="top: 22%; left: 59%;"></div>
-					<div class="map-bubble bubble--sm" style="top: 54%; left: 18%;"></div>
-					<div class="map-bubble bubble--sm" style="top: 85%; left: 59%;"></div>
-					<div class="map-bubble bubble--sm" style="top: 92%; left: 52%;"></div>
-				</div>
+          <p class="map-legend">
+            <span class="legend-dot"></span>
+            <span><strong>Concentração de apoio</strong> — Bairros onde a base já é forte</span>
+          </p>
+        </article>
 
-				<p class="map-legend">
-					<span class="legend-dot"></span>
-					<span><strong>Concentração de apoio</strong> — Bairros onde a base já é forte</span>
-				</p>
-			</article>
+        <aside class="ranking-card">
+          <header class="ranking-header">
+            <h2>Ranking de bairros</h2>
+            <p>Ordenado por concentração de apoio</p>
+          </header>
 
-			<aside class="ranking-card">
-				<header class="ranking-header">
-					<h2>Ranking de bairros</h2>
-					<p>Ordenado por concentração de apoio</p>
-				</header>
-
-				<div class="ranking-list">
-					@for (bairro of ranking; track bairro.name) {
-						<article class="ranking-item">
-							<div class="ranking-item__position">{{ bairro.position }}</div>
-							<div class="ranking-item__content">
-								<strong>{{ bairro.name }}</strong>
-								<span>{{ bairro.registered }} cadastrados · {{ bairro.demandas }} demandas</span>
-							</div>
-							<div class="ranking-item__score">{{ bairro.score }}</div>
-						</article>
-					}
-				</div>
-			</aside>
-		</section>
+          <div class="ranking-list">
+            @for (bairro of ranking; track bairro.name) {
+              <article class="ranking-item">
+                <div class="ranking-item__position">{{ bairro.position }}</div>
+                <div class="ranking-item__content">
+                  <strong>{{ bairro.name }}</strong>
+                  <span>{{ bairro.registered }} cadastrados · {{ bairro.demandas }} demandas</span>
+                </div>
+                <div class="ranking-item__score">{{ bairro.score }}</div>
+              </article>
+            }
+          </div>
+        </aside>
+      </section>
+    </div>
   `,
 	styles: [`
 		:host {

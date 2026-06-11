@@ -128,3 +128,11 @@ button {
 svg {
 	display: block;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.page-content {
+  padding: 0 1rem;
+}
