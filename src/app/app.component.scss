@@ -1,6 +1,6 @@
 :host {
 	display: block;
-	min-height: 100vh;
+	height: 100vh;
 }
 
 .app-shell {
@@ -11,6 +11,13 @@
 		radial-gradient(circle at top right, rgba(31, 95, 191, 0.18), transparent 32%),
 		radial-gradient(circle at bottom left, rgba(243, 198, 35, 0.12), transparent 28%),
 		var(--app-bg);
+}
+
+.container_sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  align-self: start;
 }
 
 .workspace-hero {
@@ -118,7 +125,7 @@
   flex-direction: column;
 
 	// gap: 1rem;
-	padding: 1rem 1.25rem 1.25rem;
+	// padding: 1rem 1.25rem 1.25rem;
 	min-width: 0;
 	overflow: auto;
 }

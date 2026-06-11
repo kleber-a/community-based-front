@@ -1,0 +1,307 @@
+	:host {
+			display: block;
+		}
+
+		.summary-grid {
+			display: grid;
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+			gap: 1rem;
+		}
+
+		.summary-card,
+		.chart-card,
+		.list-card {
+			border: 1px solid var(--border-color);
+			border-radius: 1.35rem;
+			background: var(--surface);
+			box-shadow: var(--shadow-soft);
+		}
+
+		.summary-card {
+			display: flex;
+			align-items: center;
+			gap: 0.95rem;
+			padding: 1rem;
+		}
+
+		.summary-card__icon {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			width: 3rem;
+			height: 3rem;
+			border-radius: 0.85rem;
+			font-size: 1.25rem;
+		}
+
+		.summary-card strong {
+			display: block;
+			color: var(--text-primary);
+			font-size: clamp(1.45rem, 2vw, 2rem);
+			line-height: 1;
+		}
+
+		.summary-label {
+			display: block;
+			margin-top: 0.15rem;
+			color: var(--text-primary);
+			font-size: 0.95rem;
+			font-weight: 600;
+		}
+
+		.summary-card p {
+			margin: 0.25rem 0 0;
+			color: var(--text-muted);
+			font-size: 0.84rem;
+		}
+
+		.summary-card--mint .summary-card__icon { background: rgba(70, 192, 150, 0.12); color: #2e9f67; }
+		.summary-card--cyan .summary-card__icon { background: rgba(39, 181, 215, 0.14); color: #1f9fc6; }
+		.summary-card--amber .summary-card__icon { background: rgba(219, 181, 94, 0.16); color: #b88a1f; }
+		.summary-card--green .summary-card__icon { background: rgba(70, 192, 150, 0.12); color: #2e9f67; }
+
+		.dashboard-grid {
+			display: grid;
+			grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+			gap: 1rem;
+			margin-top: 1rem;
+		}
+
+		.chart-card,
+		.list-card {
+			padding: 1rem;
+		}
+
+		.chart-card--wide {
+			min-height: 22rem;
+		}
+
+		.section-header h2 {
+			margin: 0;
+			color: var(--text-primary);
+			font-size: 1.05rem;
+		}
+
+		.section-header p {
+			margin: 0.35rem 0 0;
+			color: var(--text-muted);
+			font-size: 0.92rem;
+		}
+
+		.line-chart {
+			display: grid;
+			grid-template-columns: 44px minmax(0, 1fr);
+			gap: 0.75rem;
+			margin-top: 1rem;
+		}
+
+		.line-chart__axis {
+			display: grid;
+			align-content: space-between;
+			padding: 0.1rem 0;
+			color: var(--text-muted);
+			font-size: 0.8rem;
+		}
+
+		.line-chart__plot {
+			position: relative;
+			min-height: 18rem;
+			padding: 0 0.25rem 1.2rem;
+		}
+
+		.line-chart__grid {
+			position: absolute;
+			inset: 0 0 1.2rem 0;
+			background-image: linear-gradient(to bottom, rgba(16, 36, 72, 0.1) 1px, transparent 1px);
+			background-size: 100% calc(100% / 4);
+			opacity: 0.55;
+			pointer-events: none;
+		}
+
+		.line-chart__area {
+			position: absolute;
+			inset: 2rem 0 2.4rem 0;
+			background: linear-gradient(180deg, rgba(52, 160, 107, 0.35) 0%, rgba(52, 160, 107, 0.08) 68%, transparent 100%);
+			clip-path: polygon(0% 78%, 12% 74%, 24% 67%, 36% 58%, 48% 47%, 60% 35%, 72% 23%, 84% 12%, 100% 4%, 100% 100%, 0 100%);
+			opacity: 0.85;
+		}
+
+		.line-chart svg {
+			position: relative;
+			z-index: 1;
+			width: 100%;
+			height: 18rem;
+			overflow: visible;
+		}
+
+		.line-chart path {
+			fill: none;
+			stroke: #1f8f63;
+			stroke-width: 4;
+			stroke-linecap: round;
+			stroke-linejoin: round;
+		}
+
+		.line-chart__secondary {
+			stroke: #d99623;
+			stroke-width: 3;
+		}
+
+		.line-chart__months {
+			display: grid;
+			grid-template-columns: repeat(6, minmax(0, 1fr));
+			margin-top: 0.25rem;
+			color: var(--text-muted);
+			font-size: 0.82rem;
+		}
+
+		.bar-chart {
+			display: grid;
+			gap: 0.75rem;
+			margin-top: 1rem;
+		}
+
+		.bar-chart__row {
+			display: grid;
+			grid-template-columns: 92px minmax(0, 1fr) 24px;
+			align-items: center;
+			gap: 0.7rem;
+		}
+
+		.bar-chart__label {
+			color: var(--text-muted);
+			font-size: 0.88rem;
+			text-align: right;
+		}
+
+		.bar-chart__track {
+			height: 1.9rem;
+			border-radius: 0.45rem;
+			background: rgba(16, 36, 72, 0.05);
+			overflow: hidden;
+		}
+
+		.bar-chart__bar {
+			height: 100%;
+			border-radius: inherit;
+			background: linear-gradient(90deg, #159160 0%, #0f8b55 100%);
+		}
+
+		.bar-chart__value {
+			color: #159160;
+			font-weight: 700;
+			text-align: right;
+		}
+
+		.demand-list,
+		.opportunity-list {
+			display: grid;
+			gap: 0.7rem;
+			margin-top: 1rem;
+		}
+
+		.demand-item,
+		.opportunity-item {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 0.75rem;
+			padding: 0.75rem 0.85rem;
+			border: 1px solid var(--border-color);
+			border-radius: 0.9rem;
+			background: var(--surface-elevated);
+		}
+
+		.demand-item strong,
+		.opportunity-item strong {
+			display: block;
+			color: var(--text-primary);
+			font-size: 0.93rem;
+		}
+
+		.demand-item p,
+		.opportunity-item span {
+			margin: 0.2rem 0 0;
+			color: var(--text-muted);
+			font-size: 0.84rem;
+		}
+
+		.demand-pill,
+		.opportunity-item__badge {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			border-radius: 999px;
+			padding: 0.25rem 0.55rem;
+			font-size: 0.75rem;
+			font-weight: 700;
+		}
+
+		.demand-pill.status--open {
+			background: rgba(255, 77, 77, 0.1);
+			color: #ff4d4d;
+		}
+
+		.demand-pill.status--progress {
+			background: rgba(218, 161, 66, 0.16);
+			color: #9e6b13;
+		}
+
+		.demand-pill.status--done {
+			background: rgba(22, 159, 122, 0.14);
+			color: #138a67;
+		}
+
+		.opportunity-item {
+			align-items: flex-start;
+		}
+
+		.opportunity-item__rank {
+			display: grid;
+			place-items: center;
+			width: 2rem;
+			height: 2rem;
+			flex: 0 0 auto;
+			border-radius: 999px;
+			background: rgba(218, 161, 66, 0.18);
+			color: #7f5f15;
+			font-weight: 700;
+		}
+
+		.opportunity-item__content {
+			flex: 1;
+			min-width: 0;
+		}
+
+		.opportunity-item__badge {
+			background: rgba(218, 161, 66, 0.16);
+			color: #7f5f15;
+		}
+
+		@media (max-width: 1120px) {
+			.summary-grid {
+				grid-template-columns: repeat(2, minmax(0, 1fr));
+			}
+
+			.dashboard-grid {
+				grid-template-columns: 1fr;
+			}
+		}
+
+		@media (max-width: 720px) {
+			.summary-grid {
+				grid-template-columns: 1fr;
+			}
+
+			.line-chart {
+				grid-template-columns: 32px minmax(0, 1fr);
+			}
+
+			.bar-chart__row {
+				grid-template-columns: 1fr;
+			}
+
+			.bar-chart__label {
+				text-align: left;
+			}
+		}

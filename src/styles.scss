@@ -1,45 +1,88 @@
 :root {
 	color-scheme: dark;
-	--app-bg: #07101d;
-	--surface: rgba(11, 21, 38, 0.94);
-	--surface-strong: rgba(8, 18, 34, 0.98);
-	--border-color: rgba(210, 225, 255, 0.12);
-	--sidebar-bg: linear-gradient(180deg, rgba(8, 18, 34, 0.96), rgba(6, 14, 28, 0.99));
-	--sidebar-card-bg: rgba(255, 255, 255, 0.03);
-	--sidebar-card-border: rgba(255, 255, 255, 0.06);
-	--sidebar-hover-bg: rgba(255, 255, 255, 0.05);
-	--sidebar-active-bg: rgba(243, 198, 35, 0.18);
-	--sidebar-user-border: rgba(255, 255, 255, 0.08);
-	--brand: #1f5fbf;
-	--brand-strong: #123f8a;
-	--accent: #f3c623;
-	--accent-soft: rgba(243, 198, 35, 0.14);
-	--text-primary: #f8fbff;
-	--text-secondary: #d7e0ef;
-	--text-muted: #9fb0cb;
-	--shadow-soft: 0 24px 48px rgba(0, 0, 0, 0.32);
+
+	/* Fundo */
+	--app-bg: #041f3b;
+	--surface: #0a2e56;
+	--surface-strong: #07305f;
+
+	/* Bordas */
+	--border-color: rgba(255, 255, 255, 0.12);
+
+	/* Sidebar */
+	--sidebar-bg: #005AAB;
+  // linear-gradient(
+	// 	180deg,
+	// 	#005aab 0%,
+	// 	#004b8f 100%
+	// );
+	--sidebar-card-bg: rgba(255, 255, 255, 0.08);
+	--sidebar-card-border: rgba(255, 255, 255, 0.15);
+	--sidebar-hover-bg: rgba(252, 218, 4, 0.12);
+	--sidebar-active-bg: rgba(252, 218, 4, 0.22);
+	--sidebar-user-border: rgba(255, 255, 255, 0.18);
+
+	/* Marca */
+	--brand: #005aab;
+	--brand-strong: #00427f;
+
+	/* Destaques */
+	--accent: #fcda04;
+	--accent-soft: rgba(252, 218, 4, 0.18);
+
+	/* Textos */
+	--text-primary: #ffffff;
+	--text-secondary: rgba(255, 255, 255, 0.82);
+	--text-muted: rgba(255, 255, 255, 0.6);
+
+	/* Sombras */
+	--shadow-soft: 0 24px 48px rgba(0, 0, 0, 0.3);
 }
 
 :root[data-theme='light'] {
 	color-scheme: light;
-	--app-bg: #edf4ff;
-	--surface: rgba(255, 255, 255, 0.92);
-	--surface-strong: rgba(245, 249, 255, 0.98);
-	--border-color: rgba(16, 36, 72, 0.1);
-	--sidebar-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(243, 247, 255, 0.98));
-	--sidebar-card-bg: rgba(255, 255, 255, 0.75);
-	--sidebar-card-border: rgba(16, 36, 72, 0.08);
-	--sidebar-hover-bg: rgba(24, 85, 184, 0.08);
-	--sidebar-active-bg: rgba(224, 180, 0, 0.18);
-	--sidebar-user-border: rgba(16, 36, 72, 0.1);
-	--brand: #1855b8;
-	--brand-strong: #123f8a;
-	--accent: #e0b400;
-	--accent-soft: rgba(224, 180, 0, 0.14);
-	--text-primary: #0d1b34;
-	--text-secondary: #40506c;
-	--text-muted: #63738c;
-	--shadow-soft: 0 18px 34px rgba(30, 58, 95, 0.12);
+
+	/* Fundo */
+	--app-bg: #f4f8fc;
+	--surface: #ffffff;
+	--surface-strong: #ffffff;
+
+	/* Bordas */
+	--border-color: rgba(0, 90, 171, 0.12);
+
+	/* Sidebar */
+	--sidebar-bg: #005AAB;
+  // --sidebar-bg: linear-gradient(
+	// 	180deg,
+	// 	#ffffff 0%,
+	// 	#f5f9ff 100%
+	// );
+	--sidebar-card-bg: #ffffff;
+	--sidebar-card-border: rgba(0, 90, 171, 0.1);
+	--sidebar-hover-bg: rgba(0, 90, 171, 0.08);
+	--sidebar-active-bg: rgba(252, 218, 4, 0.18);
+	--sidebar-user-border: rgba(0, 90, 171, 0.1);
+
+	/* Marca */
+	--brand: #005aab;
+	--brand-strong: #00427f;
+
+	/* Destaques */
+	--accent: #fcda04;
+	--accent-soft: rgba(252, 218, 4, 0.14);
+
+	/* Textos */
+	--text-primary: #005aab;
+	--text-secondary: #335b86;
+	--text-muted: #6f86a3;
+
+  	/* Textos */
+	--text-primarysd: #ffffff;
+	--text-secondarysd: rgba(255, 255, 255, 0.82);
+	--text-mutedsd: rgba(255, 255, 255, 0.6);
+
+	/* Sombras */
+	--shadow-soft: 0 18px 34px rgba(0, 90, 171, 0.12);
 }
 
 html {
