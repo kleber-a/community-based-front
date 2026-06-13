@@ -40,6 +40,7 @@ export class CreatePersonComponent implements OnInit {
       // Dados pessoais
       name: ['', Validators.required],
       birthDate: [''],
+      cpf: [''],
       phone: [''],
       facebook: [''],
       instagram: [''],

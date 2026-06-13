@@ -15,6 +15,10 @@
       <section class="modal-section">
         <h3 class="modal-section__title">Dados Pessoais</h3>
         <div class="modal-grid">
+           <div class="modal-field">
+            <span class="modal-field__label">CPF</span>
+            <span class="modal-field__value">{{ data.cpf || '—' }}</span>
+          </div>
           <div class="modal-field">
             <span class="modal-field__label">Data de Nascimento</span>
             <span class="modal-field__value">{{ data.birthDate || '—' }}</span>

@@ -35,6 +35,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 export type PersonDetail = {
   name: string;
+  cpf: string;
   birthDate?: string;
   phone?: string;
   facebook?: string;

@@ -139,6 +139,7 @@ export class PessoasPageComponent {
   readonly peopleMock: PeopleRow[] = [
     {
       name: 'Maria das Graças Silva',
+      cpf: '123.456.789-00',
       birthDate: '12/03/1985',
       phone: '(81) 99999-1001',
       address: 'Rua das Palmeiras, 45',
@@ -161,6 +162,7 @@ export class PessoasPageComponent {
     },
     {
       name: 'José Carlos Pereira',
+      cpf: '123.456.789-00',
       birthDate: '07/11/1978',
       phone: '(81) 99999-1002',
       address: 'Av. Principal, 200',
@@ -183,6 +185,7 @@ export class PessoasPageComponent {
     },
     {
       name: 'Ana Beatriz Lima',
+      cpf: '123.456.789-00',
       birthDate: '22/06/1995',
       phone: '(81) 99999-1003',
       address: 'Rua do Mar, 10, Apto 301',
@@ -205,6 +208,7 @@ export class PessoasPageComponent {
     },
     {
       name: 'Severino Ramos',
+      cpf: '123.456.789-00',
       birthDate: '15/01/1960',
       phone: '(81) 99999-1004',
       address: 'Rua Nova, 88',
@@ -227,6 +231,7 @@ export class PessoasPageComponent {
     },
     {
       name: 'Juliana Santos',
+      cpf: '123.456.789-00',
       birthDate: '30/09/2000',
       phone: '(81) 99999-1005',
       address: 'Rua Amarela, 55, Casa 2',

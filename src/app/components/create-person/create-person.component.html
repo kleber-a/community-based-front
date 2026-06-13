@@ -66,6 +66,35 @@
                 </span>
               }
             </div>
+                 <div class="modal-field modal-field--wide">
+              <label
+                class="modal-field__label"
+                for="name"
+              >
+                CPF *
+              </label>
+
+              <input
+                class="modal-input"
+                id="name"
+                type="text"
+                placeholder="Ex: 123.456.789-00"
+                formControlName="cpf"
+                [class.modal-input--error]="
+                  nameControl?.invalid &&
+                  nameControl?.touched
+                "
+              />
+
+              @if (
+                nameControl?.hasError('required') &&
+                nameControl?.touched
+              ) {
+                <span class="modal-field__error">
+                  Campo obrigatório
+                </span>
+              }
+            </div>
 
             <div class="modal-field">
               <label
