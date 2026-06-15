@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -8,6 +8,7 @@ import {
 import { MatDialogRef } from '@angular/material/dialog';
 import { PersonDetail } from '../pessoa-modal/pessoa-modal.component';
 import { CommonModule } from '@angular/common';
+import { PeopleService } from '../../services/people.service';
 
 @Component({
   selector: 'app-create-person',
@@ -20,6 +21,8 @@ import { CommonModule } from '@angular/common';
 })
 export class CreatePersonComponent implements OnInit {
 
+  private peopleService = inject(PeopleService);
+
   readonly availableActivities = [
     'Funcional',
     'Boxe',
@@ -30,10 +33,13 @@ export class CreatePersonComponent implements OnInit {
 
   form!: FormGroup;
 
+  isSaving = false;
+
+
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<CreatePersonComponent>
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -121,16 +127,66 @@ export class CreatePersonComponent implements OnInit {
     control?.setValue(current);
   }
 
+  // submit(): void {
+  //   if (this.form.invalid) {
+  //     this.form.markAllAsTouched();
+  //     return;
+  //   }
+
+  //   const payload =
+  //     this.form.getRawValue() as PersonDetail;
+
+  //   this.dialogRef.close(payload);
+  // }
+
   submit(): void {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
     }
 
-    const payload =
-      this.form.getRawValue() as PersonDetail;
+    // const payload = this.form.getRawValue();
+    const formValue = this.form.getRawValue();
 
-    this.dialogRef.close(payload);
+    const payload = {
+      nome: formValue.name,
+      cpf: formValue.cpf,
+      dataNascimento: formValue.birthDate,
+      telefone: formValue.phone,
+      facebook: formValue.facebook,
+      instagram: formValue.instagram,
+
+      endereco: formValue.address,
+      pontoReferencia: formValue.reference,
+      bairro: formValue.neighborhood,
+      cidade: formValue.city,
+      uf: formValue.uf,
+      cep: formValue.cep,
+      comunidade: formValue.community,
+
+      localVotacao: formValue.pollingPlace,
+      tituloEleitor: formValue.voterTitle,
+      zona: formValue.zone,
+      secao: formValue.section,
+      coordenador: formValue.coordinator,
+
+      atividades: formValue.activities,
+      obs: formValue.obs,
+    };
+    console.log('Payload to submit:', payload);
+    this.isSaving = true;
+
+    this.peopleService.create(payload)
+      .subscribe({
+        next: (person) => {
+          this.isSaving = false;
+          this.dialogRef.close(person);
+        },
+        error: (error) => {
+          this.isSaving = false;
+          console.error(error);
+        }
+      });
   }
 
   close(): void {
@@ -146,25 +202,25 @@ export class CreatePersonComponent implements OnInit {
     }
   }
 
- addActivity(input: HTMLInputElement): void {
-  const activity = input.value.trim();
+  addActivity(input: HTMLInputElement): void {
+    const activity = input.value.trim();
 
-  if (!activity) {
-    return;
+    if (!activity) {
+      return;
+    }
+
+    const activities = [
+      ...(this.form.get('activities')?.value || [])
+    ];
+
+    if (!activities.includes(activity)) {
+      activities.push(activity);
+
+      this.form.get('activities')?.setValue(activities);
+    }
+
+    input.value = '';
   }
-
-  const activities = [
-    ...(this.form.get('activities')?.value || [])
-  ];
-
-  if (!activities.includes(activity)) {
-    activities.push(activity);
-
-    this.form.get('activities')?.setValue(activities);
-  }
-
-  input.value = '';
-}
   removeActivity(activity: string): void {
     const activities = (
       this.form.get('activities')?.value || []

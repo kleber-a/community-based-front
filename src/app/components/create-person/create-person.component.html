@@ -1,10 +1,5 @@
 <div class="modal-overlay" (click)="onOverlayClick($event)">
-  <div
-    class="modal"
-    role="dialog"
-    aria-modal="true"
-    aria-label="Cadastrar pessoa"
-  >
+  <div class="modal" role="dialog" aria-modal="true" aria-label="Cadastrar pessoa">
     <form [formGroup]="form">
 
       <header class="modal-header">
@@ -17,12 +12,7 @@
           </h2>
         </div>
 
-        <button
-          type="button"
-          class="modal-close"
-          (click)="close()"
-          aria-label="Fechar"
-        >
+        <button type="button" class="modal-close" (click)="close()" aria-label="Fechar">
           ✕
         </button>
       </header>
@@ -38,129 +28,78 @@
           <div class="modal-grid">
 
             <div class="modal-field modal-field--wide">
-              <label
-                class="modal-field__label"
-                for="name"
-              >
+              <label class="modal-field__label" for="name">
                 Nome completo *
               </label>
 
-              <input
-                class="modal-input"
-                id="name"
-                type="text"
-                placeholder="Ex: Maria das Graças Silva"
-                formControlName="name"
-                [class.modal-input--error]="
+              <input class="modal-input" id="name" type="text" placeholder="Ex: Maria das Graças Silva"
+                formControlName="name" [class.modal-input--error]="
                   nameControl?.invalid &&
                   nameControl?.touched
-                "
-              />
+                " />
 
               @if (
-                nameControl?.hasError('required') &&
-                nameControl?.touched
+              nameControl?.hasError('required') &&
+              nameControl?.touched
               ) {
-                <span class="modal-field__error">
-                  Campo obrigatório
-                </span>
+              <span class="modal-field__error">
+                Campo obrigatório
+              </span>
               }
             </div>
-                 <div class="modal-field modal-field--wide">
-              <label
-                class="modal-field__label"
-                for="name"
-              >
+            <div class="modal-field modal-field--wide">
+              <label class="modal-field__label" for="name">
                 CPF *
               </label>
 
-              <input
-                class="modal-input"
-                id="name"
-                type="text"
-                placeholder="Ex: 123.456.789-00"
-                formControlName="cpf"
+              <input class="modal-input" id="name" type="text" placeholder="Ex: 123.456.789-00" formControlName="cpf"
                 [class.modal-input--error]="
                   nameControl?.invalid &&
                   nameControl?.touched
-                "
-              />
+                " />
 
               @if (
-                nameControl?.hasError('required') &&
-                nameControl?.touched
+              nameControl?.hasError('required') &&
+              nameControl?.touched
               ) {
-                <span class="modal-field__error">
-                  Campo obrigatório
-                </span>
+              <span class="modal-field__error">
+                Campo obrigatório
+              </span>
               }
             </div>
 
             <div class="modal-field">
-              <label
-                class="modal-field__label"
-                for="birthDate"
-              >
+              <label class="modal-field__label" for="birthDate">
                 Data de Nascimento
               </label>
 
-              <input
-                class="modal-input"
-                id="birthDate"
-                type="date"
-                formControlName="birthDate"
-              />
+              <input class="modal-input" id="birthDate" type="date" formControlName="birthDate" />
             </div>
 
             <div class="modal-field">
-              <label
-                class="modal-field__label"
-                for="phone"
-              >
+              <label class="modal-field__label" for="phone">
                 Telefone
               </label>
 
-              <input
-                class="modal-input"
-                id="phone"
-                type="tel"
-                placeholder="(81) 99999-0000"
-                formControlName="phone"
-              />
+              <input class="modal-input" id="phone" type="tel" placeholder="(81) 99999-0000" formControlName="phone" />
             </div>
 
             <div class="modal-field">
-              <label
-                class="modal-field__label"
-                for="facebook"
-              >
+              <label class="modal-field__label" for="facebook">
                 Facebook
               </label>
 
-              <input
-                class="modal-input"
-                id="facebook"
-                type="text"
-                placeholder="usuario.facebook"
-                formControlName="facebook"
-              />
+              <input class="modal-input" id="facebook" type="text" placeholder="usuario.facebook"
+                formControlName="facebook" />
             </div>
 
             <div class="modal-field">
-              <label
-                class="modal-field__label"
-                for="instagram"
-              >
+              <label class="modal-field__label" for="instagram">
                 Instagram
               </label>
 
-              <input
-                class="modal-input"
-                id="instagram"
-                type="text"
-                placeholder="@usuario"
-                formControlName="instagram"
-              />
+              <input class="modal-input" id="instagram" type="text" placeholder="@usuario"
+                formControlName="instagram" />
             </div>
 
           </div>
@@ -175,123 +114,64 @@
           <div class="modal-grid">
 
             <div class="modal-field modal-field--wide">
-              <label
-                class="modal-field__label"
-                for="address"
-              >
+              <label class="modal-field__label" for="address">
                 Endereço
               </label>
 
-              <input
-                class="modal-input"
-                id="address"
-                type="text"
-                placeholder="Rua, número, complemento"
-                formControlName="address"
-              />
+              <input class="modal-input" id="address" type="text" placeholder="Rua, número, complemento"
+                formControlName="address" />
             </div>
 
             <div class="modal-field modal-field--wide">
-              <label
-                class="modal-field__label"
-                for="reference"
-              >
+              <label class="modal-field__label" for="reference">
                 Ponto de Referência
               </label>
 
-              <input
-                class="modal-input"
-                id="reference"
-                type="text"
-                placeholder="Ex: Próximo à padaria São José"
-                formControlName="reference"
-              />
+              <input class="modal-input" id="reference" type="text" placeholder="Ex: Próximo à padaria São José"
+                formControlName="reference" />
             </div>
 
             <div class="modal-field">
-              <label
-                class="modal-field__label"
-                for="neighborhood"
-              >
+              <label class="modal-field__label" for="neighborhood">
                 Bairro
               </label>
 
-              <input
-                class="modal-input"
-                id="neighborhood"
-                type="text"
-                placeholder="Ex: Ibura"
-                formControlName="neighborhood"
-              />
+              <input class="modal-input" id="neighborhood" type="text" placeholder="Ex: Ibura"
+                formControlName="neighborhood" />
             </div>
 
             <div class="modal-field">
-              <label
-                class="modal-field__label"
-                for="city"
-              >
+              <label class="modal-field__label" for="city">
                 Cidade
               </label>
 
-              <input
-                class="modal-input"
-                id="city"
-                type="text"
-                placeholder="Ex: Recife"
-                formControlName="city"
-              />
+              <input class="modal-input" id="city" type="text" placeholder="Ex: Recife" formControlName="city" />
             </div>
 
             <div class="modal-field">
-              <label
-                class="modal-field__label"
-                for="uf"
-              >
+              <label class="modal-field__label" for="uf">
                 UF
               </label>
 
-              <input
-                class="modal-input modal-input--short"
-                id="uf"
-                type="text"
-                placeholder="PE"
-                maxlength="2"
-                formControlName="uf"
-              />
+              <input class="modal-input modal-input--short" id="uf" type="text" placeholder="PE" maxlength="2"
+                formControlName="uf" />
             </div>
 
             <div class="modal-field">
-              <label
-                class="modal-field__label"
-                for="cep"
-              >
+              <label class="modal-field__label" for="cep">
                 CEP
               </label>
 
-              <input
-                class="modal-input"
-                id="cep"
-                type="text"
-                placeholder="00000-000"
-                formControlName="cep"
-              />
+              <input class="modal-input" id="cep" type="text" placeholder="00000-000" formControlName="cep" />
             </div>
 
             <div class="modal-field">
-              <label
-                class="modal-field__label"
-                for="community"
-              >
+              <label class="modal-field__label" for="community">
                 Comunidade
               </label>
 
-              <input
-                class="modal-input"
-                id="community"
-                type="text"
-                placeholder="Ex: Comunidade do Ibura"
-                formControlName="community"
-              />
+              <input class="modal-input" id="community" type="text" placeholder="Ex: Comunidade do Ibura"
+                formControlName="community" />
             </div>
 
           </div>
@@ -306,88 +186,46 @@
           <div class="modal-grid">
 
             <div class="modal-field modal-field--wide">
-              <label
-                class="modal-field__label"
-                for="pollingPlace"
-              >
+              <label class="modal-field__label" for="pollingPlace">
                 Local de Votação
               </label>
 
-              <input
-                class="modal-input"
-                id="pollingPlace"
-                type="text"
-                placeholder="Ex: Escola Municipal Ibura"
-                formControlName="pollingPlace"
-              />
+              <input class="modal-input" id="pollingPlace" type="text" placeholder="Ex: Escola Municipal Ibura"
+                formControlName="pollingPlace" />
             </div>
 
             <div class="modal-field">
-              <label
-                class="modal-field__label"
-                for="voterTitle"
-              >
+              <label class="modal-field__label" for="voterTitle">
                 Título de Eleitor
               </label>
 
-              <input
-                class="modal-input"
-                id="voterTitle"
-                type="text"
-                placeholder="0000 0000 0000"
-                formControlName="voterTitle"
-              />
+              <input class="modal-input" id="voterTitle" type="text" placeholder="0000 0000 0000"
+                formControlName="voterTitle" />
             </div>
 
             <div class="modal-field">
-              <label
-                class="modal-field__label"
-                for="zone"
-              >
+              <label class="modal-field__label" for="zone">
                 Zona
               </label>
 
-              <input
-                class="modal-input"
-                id="zone"
-                type="text"
-                placeholder="Ex: 42"
-                formControlName="zone"
-              />
+              <input class="modal-input" id="zone" type="text" placeholder="Ex: 42" formControlName="zone" />
             </div>
 
             <div class="modal-field">
-              <label
-                class="modal-field__label"
-                for="section"
-              >
+              <label class="modal-field__label" for="section">
                 Seção
               </label>
 
-              <input
-                class="modal-input"
-                id="section"
-                type="text"
-                placeholder="Ex: 0123"
-                formControlName="section"
-              />
+              <input class="modal-input" id="section" type="text" placeholder="Ex: 0123" formControlName="section" />
             </div>
 
             <div class="modal-field">
-              <label
-                class="modal-field__label"
-                for="coordinator"
-              >
+              <label class="modal-field__label" for="coordinator">
                 Coordenador
               </label>
 
-              <input
-                class="modal-input"
-                id="coordinator"
-                type="text"
-                placeholder="Ex: João da Silva"
-                formControlName="coordinator"
-              />
+              <input class="modal-input" id="coordinator" type="text" placeholder="Ex: João da Silva"
+                formControlName="coordinator" />
             </div>
 
           </div>
@@ -425,20 +263,12 @@
 
           <div class="modal-grid">
             <div class="modal-field modal-field--wide">
-              <label
-                class="modal-field__label"
-                for="obs"
-              >
+              <label class="modal-field__label" for="obs">
                 Descrição / Observações
               </label>
 
-              <textarea
-                class="modal-input modal-input--textarea"
-                id="obs"
-                rows="3"
-                placeholder="Alguma observação relevante sobre a pessoa..."
-                formControlName="obs"
-              ></textarea>
+              <textarea class="modal-input modal-input--textarea" id="obs" rows="3"
+                placeholder="Alguma observação relevante sobre a pessoa..." formControlName="obs"></textarea>
             </div>
           </div>
         </section>
@@ -446,20 +276,12 @@
       </div>
 
       <footer class="modal-footer">
-        <button
-          type="button"
-          class="btn btn--ghost"
-          (click)="close()"
-        >
+        <button type="button" class="btn btn--ghost" (click)="close()">
           Cancelar
         </button>
 
-        <button
-          type="button"
-          class="btn btn--primary"
-          (click)="submit()"
-        >
-          Salvar cadastro
+        <button type="button" class="btn btn--primary" (click)="submit()">
+          {{ isSaving ? 'Salvando...' : 'Salvar cadastro' }}
         </button>
       </footer>
 

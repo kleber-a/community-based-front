@@ -62,29 +62,33 @@
   </div> -->
 
 
-  <div class="pessoas-page">
+<div class="pessoas-page">
 
-  <app-page-header
-    kicker="Pessoas da Comunidade"
-    title="Pessoas da Comunidade"
-    subtitle="Cadastro e classificação do eleitorado"
-    actionLabel="Cadastrar"
-    actionIcon="+"
-    (actionClick)="openCadastro()"
-  />
+  <app-page-header kicker="Pessoas da Comunidade" title="Pessoas da Comunidade"
+    subtitle="Cadastro e classificação do eleitorado" actionLabel="Cadastrar" actionIcon="+"
+    (actionClick)="openCadastro()" />
 
   <div class="page-content">
     <section class="page-filters">
-      <label class="search-field">
-        <span class="search-field__icon" aria-hidden="true">⌕</span>
-        <input type="search" placeholder="Buscar por nome ou telefone..." />
-      </label>
+      <div class="filter-group">
+        <label class="search-field">
+          <span class="search-field__icon" aria-hidden="true">⌕</span>
+          <input type="search" placeholder="Buscar por Nome..." [(ngModel)]="nameFilter" />
+        </label>
 
-      <select aria-label="Filtro de atividades">
-        @for (option of activityFilterOptions; track option) {
-          <option>{{ option }}123</option>
-        }
-      </select>
+        <label class="search-field">
+          <span class="search-field__icon">⌕</span>
+          <input type="text" placeholder="Buscar por CPF..." [(ngModel)]="cpfFilter" />
+        </label>
+        <button type="button" class="filter-buttons" (click)="clearFilters()">
+          Limpar filtros
+        </button>
+        <button type="button" class="filter-buttons" (click)="search()">
+          Buscar
+        </button>
+      </div>
+
+
     </section>
 
     <section class="table-card">
@@ -92,6 +96,7 @@
         <thead>
           <tr>
             <th>Nome</th>
+            <th>CPF</th>
             <th>Telefone</th>
             <th>Bairro</th>
             <th>Atividades</th>
@@ -99,28 +104,46 @@
           </tr>
         </thead>
         <tbody>
-          @for (person of peopleMock; track person.name) {
-            <tr class="row--clickable" (click)="openModal(person)">
-              <td>{{ person.name }}</td>
-              <td>{{ person.phone }}</td>
-              <td>{{ person.neighborhood }}</td>
-              <td>
-                @for (activity of person.activities; track activity) {
-                  <span class="tag">{{ activity }}</span>
-                }
-                @if (!person.activities.length) {
-                  <span class="tag tag--muted">—</span>
-                }
-              </td>
-              <td class="col-action">
-                <button class="btn-detail" [attr.aria-label]="'Ver detalhes de ' + person.name">
-                  →
-                </button>
-              </td>
-            </tr>
+          @if (people$ | async; as response) {
+          @for (person of response.data; track person.id) {
+          <tr class="row--clickable" (click)="openModal(person)">
+            <td>{{ person.nome }}</td>
+            <td>{{ person.cpf }}</td>
+            <td>{{ person.telefone }}</td>
+            <td>{{ person.endereco }}</td>
+            <td>
+              @for (activity of person.atividades; track activity) {
+              <span class="tag">{{ activity }}</span>
+              }
+              @if (!person.atividades.length) {
+              <span class="tag tag--muted">—</span>
+              }
+            </td>
+            <td class="col-action">
+              <button class="btn-detail" [attr.aria-label]="'Ver detalhes de ' + person.nome">
+                →
+              </button>
+            </td>
+          </tr>
+          }
           }
         </tbody>
       </table>
+      <section class="pagination">
+
+        <button type="button" (click)="previousPage()" [disabled]="page === 1">
+          Anterior
+        </button>
+
+        <span>
+          Página {{ page }} de {{ totalPages }}
+        </span>
+
+        <button type="button" (click)="nextPage()" [disabled]="page >= totalPages">
+          Próxima
+        </button>
+
+      </section>
     </section>
   </div>
 
