@@ -1,5 +1,7 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { CepPipe } from '../../pipes/cep.pipe';
 
 // export type PersonDetail = {
 //   // Dados pessoais
@@ -34,45 +36,48 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 // };
 
 export type PersonDetail = {
-  name: string;
+  nome: string;
   cpf: string;
-  birthDate?: string;
-  phone?: string;
+  dataNascimento?: string;
+  telefone?: string;
   facebook?: string;
   instagram?: string;
 
-  address?: string;
-  reference?: string;
-  neighborhood?: string;
-  city?: string;
+  endereco?: string;
+  pontoReferencia?: string;
+  bairro?: string;
+  cidade?: string;
   uf?: string;
   cep?: string;
-  community?: string;
+  comunidade?: string;
 
-  pollingPlace?: string;
-  voterTitle?: string;
-  zone?: string;
-  section?: string;
-  coordinator?: string;
+  localVotacao?: string;
+  tituloEleitor?: string;
+  zona?: string;
+  secao?: string;
+  coordenador?: string;
 
-  activities: string[];
+  atividades: string[];
 
   obs?: string;
 };
 
 @Component({
   selector: 'app-pessoa-modal',
+  standalone: true,
+  imports: [CommonModule, CepPipe],
   templateUrl: './pessoa-modal.component.html',
   styleUrl: './pessoa-modal.component.scss'
 })
 export class PessoaModalComponent implements OnInit {
 
- constructor(
+  constructor(
     public dialogRef: MatDialogRef<PessoaModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: PersonDetail
-  ) {}
+  ) { }
 
   ngOnInit() {
+    console.log(this.data);
   }
 
   close() {
@@ -85,6 +90,22 @@ export class PessoaModalComponent implements OnInit {
     }
   }
 
+  formatCpf(cpf: string): string {
+    return cpf
+      .replace(/\D/g, '')
+      .replace(/(\d{3})(\d)/, '$1.$2')
+      .replace(/(\d{3})(\d)/, '$1.$2')
+      .replace(/(\d{3})(\d{1,2})/, '$1-$2')
+      .replace(/(-\d{2})\d+?$/, '$1');
+  }
+
+  formatPhone(phone: string): string {
+    return phone
+      .replace(/\D/g, '')
+      .replace(/(\d{2})(\d)/, '($1) $2')
+      .replace(/(\d{5})(\d)/, '$1-$2')
+      .replace(/(-\d{4})\d+?$/, '$1');
+  }
 
 
 }

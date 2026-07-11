@@ -1,10 +1,10 @@
 <div class="modal-overlay" (click)="onOverlayClick($event)">
-  <div class="modal" role="dialog" aria-modal="true" [attr.aria-label]="data.name">
+  <div class="modal" role="dialog" aria-modal="true" [attr.aria-label]="data.nome">
 
     <header class="modal-header">
       <div class="modal-header__meta">
         <span class="modal-header__kicker">Pessoa da Comunidade</span>
-        <h2 class="modal-header__name">{{ data.name }}</h2>
+        <h2 class="modal-header__name">{{ data.nome }}</h2>
       </div>
       <button class="modal-close" (click)="close()" aria-label="Fechar">✕</button>
     </header>
@@ -15,17 +15,21 @@
       <section class="modal-section">
         <h3 class="modal-section__title">Dados Pessoais</h3>
         <div class="modal-grid">
-           <div class="modal-field">
+          <!-- <div class="modal-field">
+            <span class="modal-field__label">Nome</span>
+            <span class="modal-field__value">{{ data.nome || '—' }}</span>
+          </div> -->
+          <div class="modal-field">
             <span class="modal-field__label">CPF</span>
-            <span class="modal-field__value">{{ data.cpf || '—' }}</span>
+            <span class="modal-field__value">{{ data.cpf ? formatCpf(data.cpf) : '—' }}</span>
           </div>
           <div class="modal-field">
             <span class="modal-field__label">Data de Nascimento</span>
-            <span class="modal-field__value">{{ data.birthDate || '—' }}</span>
+            <span class="modal-field__value">{{ (data.dataNascimento | date:'dd/MM/yyyy') || '—' }}</span>
           </div>
           <div class="modal-field">
             <span class="modal-field__label">Telefone</span>
-            <span class="modal-field__value">{{ data.phone || '—' }}</span>
+            <span class="modal-field__value">{{ data.telefone ? formatPhone(data.telefone) : '—' }}</span>
           </div>
           <div class="modal-field">
             <span class="modal-field__label">Facebook</span>
@@ -44,19 +48,19 @@
         <div class="modal-grid">
           <div class="modal-field modal-field--wide">
             <span class="modal-field__label">Endereço</span>
-            <span class="modal-field__value">{{ data.address || '—' }}</span>
+            <span class="modal-field__value">{{ data.endereco || '—' }}</span>
           </div>
           <div class="modal-field">
             <span class="modal-field__label">Ponto de Referência</span>
-            <span class="modal-field__value">{{ data.reference || '—' }}</span>
+            <span class="modal-field__value">{{ data.pontoReferencia || '—' }}</span>
           </div>
           <div class="modal-field">
             <span class="modal-field__label">Bairro</span>
-            <span class="modal-field__value">{{ data.neighborhood || '—' }}</span>
+            <span class="modal-field__value">{{ data.bairro || '—' }}</span>
           </div>
           <div class="modal-field">
             <span class="modal-field__label">Cidade</span>
-            <span class="modal-field__value">{{ data.city || '—' }}</span>
+            <span class="modal-field__value">{{ data.cidade || '—' }}</span>
           </div>
           <div class="modal-field">
             <span class="modal-field__label">UF</span>
@@ -64,11 +68,11 @@
           </div>
           <div class="modal-field">
             <span class="modal-field__label">CEP</span>
-            <span class="modal-field__value">{{ data.cep || '—' }}</span>
+            <span class="modal-field__value"> {{ (data.cep || '') | cep }}</span>
           </div>
           <div class="modal-field">
             <span class="modal-field__label">Comunidade</span>
-            <span class="modal-field__value">{{ data.community || '—' }}</span>
+            <span class="modal-field__value">{{ data.comunidade || '—' }}</span>
           </div>
         </div>
       </section>
@@ -79,23 +83,23 @@
         <div class="modal-grid">
           <div class="modal-field">
             <span class="modal-field__label">Local de Votação</span>
-            <span class="modal-field__value">{{ data.pollingPlace || '—' }}</span>
+            <span class="modal-field__value">{{ data.localVotacao || '—' }}</span>
           </div>
           <div class="modal-field">
             <span class="modal-field__label">Título de Eleitor</span>
-            <span class="modal-field__value">{{ data.voterTitle || '—' }}</span>
+            <span class="modal-field__value">{{ data.tituloEleitor || '—' }}</span>
           </div>
           <div class="modal-field">
             <span class="modal-field__label">Zona</span>
-            <span class="modal-field__value">{{ data.zone || '—' }}</span>
+            <span class="modal-field__value">{{ data.zona || '—' }}</span>
           </div>
           <div class="modal-field">
             <span class="modal-field__label">Seção</span>
-            <span class="modal-field__value">{{ data.section || '—' }}</span>
+            <span class="modal-field__value">{{ data.secao || '—' }}</span>
           </div>
           <div class="modal-field">
             <span class="modal-field__label">Coordenador</span>
-            <span class="modal-field__value">{{ data.coordinator || '—' }}</span>
+            <span class="modal-field__value">{{ data.coordenador || '—' }}</span>
           </div>
         </div>
       </section>
@@ -111,21 +115,21 @@
 
           <div class="activities-container">
 
-            @if (data.activities?.length) {
+            @if (data.atividades?.length) {
 
-              <div class="tag-list">
-                @for (activity of data.activities; track activity) {
-                  <span class="activity-tag">
-                    {{ activity }}
-                  </span>
-                }
-              </div>
+            <div class="tag-list">
+              @for (activity of data.atividades; track activity) {
+              <span class="activity-tag">
+                {{ activity }}
+              </span>
+              }
+            </div>
 
             } @else {
 
-              <div class="empty-state">
-                Nenhuma atividade cadastrada
-              </div>
+            <div class="empty-state">
+              Nenhuma atividade cadastrada
+            </div>
 
             }
 
@@ -135,10 +139,10 @@
 
       <!-- OBSERVAÇÕES -->
       @if (data.obs) {
-        <section class="modal-section">
-          <h3 class="modal-section__title">Observações</h3>
-          <p class="modal-obs">{{ data.obs }}</p>
-        </section>
+      <section class="modal-section">
+        <h3 class="modal-section__title">Observações</h3>
+        <p class="modal-obs">{{ data.obs }}</p>
+      </section>
       }
 
     </div>

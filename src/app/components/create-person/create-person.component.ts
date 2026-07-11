@@ -5,16 +5,20 @@ import {
   ReactiveFormsModule,
   Validators
 } from '@angular/forms';
+import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 import { MatDialogRef } from '@angular/material/dialog';
 import { PersonDetail } from '../pessoa-modal/pessoa-modal.component';
 import { CommonModule } from '@angular/common';
 import { PeopleService } from '../../services/people.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-create-person',
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxMaskDirective,
+    NgxMaskPipe
   ],
   templateUrl: './create-person.component.html',
   styleUrls: ['./create-person.component.scss']
@@ -35,6 +39,8 @@ export class CreatePersonComponent implements OnInit {
 
   isSaving = false;
 
+
+  private snackBar = inject(MatSnackBar);
 
   constructor(
     private fb: FormBuilder,
@@ -180,10 +186,12 @@ export class CreatePersonComponent implements OnInit {
       .subscribe({
         next: (person) => {
           this.isSaving = false;
+          this.showToast('Pessoa cadastrada com sucesso!', 'success');
           this.dialogRef.close(person);
         },
         error: (error) => {
           this.isSaving = false;
+          this.showToast('Erro ao cadastrar pessoa!', 'error');
           console.error(error);
         }
       });
@@ -227,6 +235,17 @@ export class CreatePersonComponent implements OnInit {
     ).filter((item: string) => item !== activity);
 
     this.form.get('activities')?.setValue(activities);
+  }
+
+  showToast(message: string, type: 'success' | 'error' = 'success') {
+    this.snackBar.open(message, 'Fechar', {
+      duration: 3000,
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+      panelClass: type === 'success'
+        ? 'toast-success'
+        : 'toast-error'
+    });
   }
 
 }

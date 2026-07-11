@@ -31,7 +31,7 @@ export class PeopleService {
 
   getAll(
     page = 1,
-    limit = 10,
+    limit = 5,
     name?: string,
     cpf?: string
   ): Observable<PaginatedResponse<Person>> {
