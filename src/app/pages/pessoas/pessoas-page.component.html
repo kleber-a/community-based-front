@@ -105,17 +105,19 @@
         </thead>
         <tbody>
           @if (people$ | async; as response) {
+          <!-- <pre>{{ response.data | json }}</pre> -->
           @for (person of response.data; track person.id) {
+
           <tr class="row--clickable" (click)="openModal(person)">
             <td>{{ person.nome }}</td>
             <td>{{ person.cpf ? formatCpf(person.cpf) : '—' }}</td>
             <td>{{ person.telefone ? formatPhone(person.telefone) : '—' }}</td>
             <td>{{ person.endereco }}</td>
             <td>
-              @for (activity of person.atividades; track activity) {
-              <span class="tag">{{ activity }}</span>
+              @for (activity of person.categorias; track activity) {
+              <span class="tag">{{ activity.nome }}</span>
               }
-              @if (!person.atividades.length) {
+              @if (!person.categorias.length) {
               <span class="tag tag--muted">—</span>
               }
             </td>

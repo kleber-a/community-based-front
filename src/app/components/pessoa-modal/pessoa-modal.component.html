@@ -115,12 +115,12 @@
 
           <div class="activities-container">
 
-            @if (data.atividades?.length) {
+            @if (data.categorias?.length) {
 
             <div class="tag-list">
-              @for (activity of data.atividades; track activity) {
+              @for (category of data.categorias; track category) {
               <span class="activity-tag">
-                {{ activity }}
+                {{ category.nome }}
               </span>
               }
             </div>

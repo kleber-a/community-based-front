@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CepPipe } from '../../pipes/cep.pipe';
+import { Category } from '../../services/people.service';
 
 // export type PersonDetail = {
 //   // Dados pessoais
@@ -57,7 +58,7 @@ export type PersonDetail = {
   secao?: string;
   coordenador?: string;
 
-  atividades: string[];
+  categorias: Category[];
 
   obs?: string;
 };

@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { PaginatedResponse, PeopleService, Person } from '../../services/people.service';
 import { Observable, tap } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
+import { JsonPipe } from '@angular/common';
 
 // type PeopleRow = {
 // 	name: string;
@@ -27,7 +28,7 @@ type PeopleRow = PersonDetail & {
 @Component({
   standalone: true,
   selector: 'app-pessoas-page',
-  imports: [PageHeaderComponent, FormsModule, AsyncPipe],
+  imports: [PageHeaderComponent, FormsModule, AsyncPipe, JsonPipe],
   templateUrl: './pessoas-page.component.html',
   styleUrl: './pessoas-page.component.scss',
 })
@@ -60,6 +61,7 @@ export class PessoasPageComponent {
       )
       .pipe(
         tap(response => {
+          console.log('response', response);
           this.total = response.meta.total;
           this.totalPages = response.meta.totalPages;
         })

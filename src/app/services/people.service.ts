@@ -8,7 +8,12 @@ export interface Person {
   cpf: string;
   telefone: string;
   endereco: string;
-  atividades: string[];
+  categorias: Category[];
+}
+
+export interface Category {
+  id: string;
+  nome: string;
 }
 
 export interface PaginatedResponse<T> {
@@ -32,15 +37,15 @@ export class PeopleService {
   getAll(
     page = 1,
     limit = 5,
-    name?: string,
+    nome?: string,
     cpf?: string
   ): Observable<PaginatedResponse<Person>> {
     let params = new HttpParams()
       .set('page', page)
       .set('limit', limit);
 
-    if (name) {
-      params = params.set('name', name);
+    if (nome) {
+      params = params.set('nome', nome);
     }
 
     if (cpf) {
@@ -61,5 +66,21 @@ export class PeopleService {
     );
   }
 
+  importarPlanilha(arquivo: File) {
+
+    const formData = new FormData();
+
+    formData.append(
+      'arquivo',
+      arquivo
+    );
+
+
+    return this.http.post(
+      `${this.apiUrl}/importar`,
+      formData
+    );
+
+  }
 
 }
