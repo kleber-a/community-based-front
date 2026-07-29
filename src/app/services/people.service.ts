@@ -1,6 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { PersonDetail } from '../components/pessoa-modal/pessoa-modal.component';
 
 export interface Person {
   id: string;
@@ -81,6 +82,36 @@ export class PeopleService {
       formData
     );
 
+  }
+
+  update(id: string, pessoa: Partial<any>) {
+    console.log('Updating person with ID:', id, 'and data:', pessoa);
+    return this.http.patch<PersonDetail>(
+      `${this.apiUrl}/${id}`,
+      pessoa
+    );
+  }
+
+  addCategorias(id: string, categoriasIds: string[]) {
+    return this.http.post(
+      `${this.apiUrl}/${id}/categories`,
+      { categoriasIds }
+    );
+  }
+
+  removeCategoria(id: string, categoriaId: string) {
+    return this.http.delete(
+      `${this.apiUrl}/${id}/categories/${categoriaId}`
+    );
+  }
+
+  private mensagemSubject = new BehaviorSubject<boolean>(false);
+
+
+  mensagem$ = this.mensagemSubject.asObservable();
+
+  enviarMensagem(mensagem: boolean): void {
+    this.mensagemSubject.next(true);
   }
 
 }

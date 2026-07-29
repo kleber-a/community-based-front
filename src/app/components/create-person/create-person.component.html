@@ -236,7 +236,7 @@
         </section>
 
         <!-- ATIVIDADES -->
-        <section class="modal-section">
+        <!-- <section class="modal-section">
           <label class="modal-field__label">
             Atividades
           </label>
@@ -258,7 +258,23 @@
             </span>
             }
           </div>
-        </section>
+        </section> -->
+        <div class="modal-field modal-field--wide"
+          style="margin-top: 1rem; margin-bottom: 1rem; padding-left: 2rem; padding-right: 2rem;">
+          <h3 class="modal-section__title">
+            Categorias
+          </h3>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Categorias</mat-label>
+
+            <mat-select formControlName="categoriasIds" multiple>
+              <mat-option *ngFor="let categoria of categorias" [value]="categoria.id">
+                {{ categoria.nome }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
         <!-- OBSERVAÇÕES -->
         <section class="modal-section">
           <h3 class="modal-section__title">

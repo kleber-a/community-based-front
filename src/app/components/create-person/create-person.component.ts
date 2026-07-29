@@ -11,6 +11,10 @@ import { PersonDetail } from '../pessoa-modal/pessoa-modal.component';
 import { CommonModule } from '@angular/common';
 import { PeopleService } from '../../services/people.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Category, CategoryService } from '../../services/category.service';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-create-person',
@@ -18,7 +22,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     CommonModule,
     ReactiveFormsModule,
     NgxMaskDirective,
-    NgxMaskPipe
+    NgxMaskPipe,
+
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule
   ],
   templateUrl: './create-person.component.html',
   styleUrls: ['./create-person.component.scss']
@@ -26,6 +34,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class CreatePersonComponent implements OnInit {
 
   private peopleService = inject(PeopleService);
+  private categoryService = inject(CategoryService);
 
   readonly availableActivities = [
     'Funcional',
@@ -39,6 +48,7 @@ export class CreatePersonComponent implements OnInit {
 
   isSaving = false;
 
+  categorias: Category[] = [];
 
   private snackBar = inject(MatSnackBar);
 
@@ -74,11 +84,19 @@ export class CreatePersonComponent implements OnInit {
       coordinator: [''],
 
       // Atividades
-      activities: [[]],
-      completedActivities: [[]],
+      categoriasIds: [[]],
 
       // Observações
       obs: ['']
+    });
+
+    this.categoryService.getAll().subscribe({
+      next: (categories) => {
+        this.categorias = categories;
+      },
+      error: (err) => {
+        console.error(err);
+      }
     });
   }
 
@@ -157,7 +175,10 @@ export class CreatePersonComponent implements OnInit {
     const payload = {
       nome: formValue.name,
       cpf: formValue.cpf,
-      dataNascimento: formValue.birthDate,
+      // dataNascimento: formValue.birthDate,
+      dataNascimento: formValue.birthDate
+        ? new Date(formValue.birthDate).toISOString()
+        : null,
       telefone: formValue.phone,
       facebook: formValue.facebook,
       instagram: formValue.instagram,
@@ -176,7 +197,7 @@ export class CreatePersonComponent implements OnInit {
       secao: formValue.section,
       coordenador: formValue.coordinator,
 
-      atividades: formValue.activities,
+      categoriasIds: formValue.categoriasIds,
       obs: formValue.obs,
     };
     console.log('Payload to submit:', payload);
@@ -247,5 +268,16 @@ export class CreatePersonComponent implements OnInit {
         : 'toast-error'
     });
   }
+
+  onCategoriasChange(event: Event): void {
+    const select = event.target as HTMLSelectElement;
+
+    const selecionadas = Array.from(select.selectedOptions).map(
+      option => option.value
+    );
+
+    this.form.get('categoriasIds')?.setValue(selecionadas);
+  }
+
 
 }

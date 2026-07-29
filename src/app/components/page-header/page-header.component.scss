@@ -78,3 +78,50 @@
         justify-content: flex-start;
       }
     }
+
+    .import-container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 20px 0;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background: #fafafa;
+}
+
+.file-label {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 18px;
+  border: 2px dashed #1976d2;
+  border-radius: 8px;
+  color: #1976d2;
+  font-weight: 500;
+  transition: all 0.25s ease;
+}
+
+.file-label:hover {
+  background: #e3f2fd;
+  border-color: #1565c0;
+}
+
+.import-btn {
+  padding: 10px 22px;
+  border: none;
+  border-radius: 8px;
+  background: #1976d2;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.import-btn:hover {
+  background: #1565c0;
+}
+
+.import-btn:active {
+  transform: scale(0.97);
+}

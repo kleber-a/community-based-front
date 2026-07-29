@@ -6,14 +6,31 @@
   </div>
 
   <div class="page-header__actions">
-    <input type="file" accept=".xlsx,.xls" (change)="selecionarArquivoD($event)">
-    <button (click)="enviarD()">
-      Importar Demandas
-    </button>
-    <input type="file" accept=".xlsx,.xls" (change)="selecionarArquivo($event)">
-    <button (click)="enviar()">
-      Importar Pessoa
-    </button>
+    <div class="import-container" *ngIf="importButtonLabel === 'demands'">
+      <label class="file-label">
+        <input type="file" accept=".xlsx,.xls" (change)="selecionarArquivoD($event)" hidden #arquivoDemandas />
+        <span>📄 Selecionar planilha de demandas</span>
+      </label>
+
+      <button class="import-btn" (click)="enviarD()">
+        Importar Demandas
+      </button>
+    </div>
+
+    <div class="import-container" *ngIf="importButtonLabel === 'people'">
+      <label class="file-label">
+        <input type="file" accept=".xlsx,.xls" (change)="selecionarArquivo($event)" hidden #arquivoPessoas />
+        <span>👤 Selecionar planilha de pessoas</span>
+      </label>
+
+      <p class="file-name" *ngIf="arquivoSelecionado">
+        📄 {{ arquivoSelecionado.name }}
+      </p>
+
+      <button class="import-btn" (click)="enviar()" [disabled]="!arquivoSelecionado">
+        Importar Pessoas
+      </button>
+    </div>
     @if (actionLabel) {
     <button type="button" class="primary-action" (click)="actionClick.emit()">
       @if (actionIcon) {

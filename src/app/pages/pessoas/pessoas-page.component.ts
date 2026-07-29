@@ -5,18 +5,11 @@ import { PessoaModalComponent, PersonDetail } from '../../components/pessoa-moda
 import { CreatePersonComponent } from '../../components/create-person/create-person.component';
 import { FormsModule } from '@angular/forms';
 import { PaginatedResponse, PeopleService, Person } from '../../services/people.service';
-import { Observable, tap } from 'rxjs';
+import { Observable, Subject, takeUntil, tap } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { JsonPipe } from '@angular/common';
+import { CategoryService } from '../../services/category.service';
 
-// type PeopleRow = {
-// 	name: string;
-// 	phone: string;
-// 	neighborhood: string;
-// 	support: string;
-// 	supportClass: 'tag--supporter' | 'tag--indeciso' | 'tag--muted';
-// 	activities: string[];
-// };
 
 type PeopleRow = PersonDetail & {
   // colunas visíveis na tabela
@@ -35,7 +28,7 @@ type PeopleRow = PersonDetail & {
 export class PessoasPageComponent {
 
   private peopleService = inject(PeopleService);
-
+  private categoryService = inject(CategoryService);
   private dialog = inject(MatDialog);
 
   nameFilter = '';
@@ -44,12 +37,19 @@ export class PessoasPageComponent {
   // people: PersonDetail[] = [];
 
   page = 1;
-  limit = 5;
+  limit = 10;
   totalPages = 0;
   total = 0;
 
+  private destroy$ = new Subject<void>();
+
   ngOnInit(): void {
     this.loadPeople();
+    this.peopleService.mensagem$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(mensagem => {
+        this.loadPeople();
+      });
   }
   loadPeople(): void {
     this.people$ = this.peopleService
@@ -104,20 +104,6 @@ export class PessoasPageComponent {
     });
   }
 
-
-  // pessoas-page.component.ts
-  // openCadastro() {
-  //   const ref = this.dialog.open(CreatePersonComponent, {
-  //     maxWidth: '100vw',
-  //     width: '680px',
-  //   });
-
-  //   ref.afterClosed().subscribe((pessoa) => {
-  //     if (pessoa) {
-  //       // this.peopleMock.push(pessoa); // ou envie para o seu serviço/API
-  //     }
-  //   });
-  // }
 
   openCadastro() {
     const ref = this.dialog.open(CreatePersonComponent, {

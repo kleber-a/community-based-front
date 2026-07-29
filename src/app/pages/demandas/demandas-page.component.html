@@ -1,0 +1,107 @@
+<div class="page-content">
+
+  <app-page-header kicker="Pessoas da Comunidade" title="Pessoas da Comunidade" importButtonLabel="demands"
+    subtitle="Cadastro e classificação do eleitorado" actionLabel="Cadastrar" actionIcon="+" />
+
+  <section class="demand-toolbar">
+
+    <input class="filter-input" type="text" placeholder="Buscar pelo título..." [(ngModel)]="filtro.titulo"
+      (keyup.enter)="aplicarFiltros()">
+
+    <input class="filter-input" type="text" placeholder="Bairro..." [(ngModel)]="filtro.bairro"
+      (keyup.enter)="aplicarFiltros()">
+
+    <select [(ngModel)]="filtro.status" (change)="aplicarFiltros()">
+
+      <option value="">Todos os status</option>
+      <option value="PENDENTE">Pendente</option>
+      <option value="EM_ANDAMENTO">Em andamento</option>
+      <option value="RESOLVIDO">Resolvido</option>
+
+    </select>
+
+    <select [(ngModel)]="filtro.prioridade" (change)="aplicarFiltros()">
+
+      <option value="">Todas prioridades</option>
+      <option value="BAIXA">Baixa</option>
+      <option value="MEDIA">Média</option>
+      <option value="ALTA">Alta</option>
+      <option value="URGENTE">Urgente</option>
+
+    </select>
+
+    <button class="search-button" (click)="aplicarFiltros()">
+
+      Buscar
+
+    </button>
+
+    <button class="clear-button" (click)="limparFiltros()">
+
+      Limpar
+
+    </button>
+
+  </section>
+
+  <section class="demand-grid">
+    @for (demand of demandas; track demand.id) {
+    <article class="demand-card">
+      <div class="demand-card__top">
+        <!-- <div class="demand-card__icon" aria-hidden="true">{{ demand.icon }}</div> -->
+        <div class="demand-card__icon">
+          {{ getIcon(demand.orgaoResponsavel) }}
+        </div>
+        <span class="demand-status" [class.status--open]="demand.status === 'PENDENTE'"
+          [class.status--progress]="demand.status === 'EM_ANDAMENTO'"
+          [class.status--done]="demand.status === 'RESOLVIDO'">
+
+          {{ demand.status }}
+
+        </span>
+      </div>
+
+      <h2>{{ demand.titulo }}</h2>
+      <p class="demand-meta">
+        {{ demand.bairro }} • {{ demand.rua }}
+      </p>
+
+      <div class="demand-tags">
+        <span class="tag">
+          {{ demand.orgaoResponsavel }}
+        </span>
+
+        <span class="tag tag--deadline">
+          {{ demand.dataSolicitacao | date:'dd/MM/yyyy' }}
+        </span>
+      </div>
+      <!-- <div class="demand-tags">
+        <span class="tag">{{ demand.department }}</span>
+        <span class="tag tag--deadline">Prazo: {{ demand.deadline }}</span>
+      </div> -->
+
+      <button type="button" class="advance-button">Avançar status</button>
+    </article>
+    }
+  </section>
+</div>
+
+<div class="pagination">
+
+  <button (click)="page = page - 1; buscarDemandas()" [disabled]="page === 1">
+
+    Anterior
+
+  </button>
+
+  <span>
+    Página {{ page }} de {{ totalPages }}
+  </span>
+
+  <button (click)="page = page + 1; buscarDemandas()" [disabled]="page === totalPages">
+
+    Próxima
+
+  </button>
+
+</div>

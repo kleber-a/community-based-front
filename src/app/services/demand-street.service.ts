@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { PaginatedResponse, Person } from './people.service';
+import { DemandStreet } from '../../models/demand-street.model';
 
 @Injectable({
   providedIn: 'root',
@@ -11,37 +12,48 @@ export class DemandStreetService {
 
   private apiUrl = 'http://localhost:3000/demand-street';
 
-  // getAll(
-  //   page = 1,
-  //   limit = 5,
-  //   nome?: string,
-  //   cpf?: string
-  // ): Observable<PaginatedResponse<Person>> {
-  //   let params = new HttpParams()
-  //     .set('page', page)
-  //     .set('limit', limit);
+  getAll(
+    page = 1,
+    limit = 9,
+    filtro?: {
+      titulo?: string;
+      bairro?: string;
+      status?: string;
+      prioridade?: string;
+    }
+  ): Observable<PaginatedResponse<DemandStreet>> {
 
-  //   if (nome) {
-  //     params = params.set('nome', nome);
-  //   }
+    let params = new HttpParams()
+      .set('page', page)
+      .set('limit', limit);
 
-  //   if (cpf) {
-  //     params = params.set('cpf', cpf);
-  //   }
+    if (filtro?.titulo) {
+      params = params.set('titulo', filtro.titulo);
+    }
+    if (filtro?.prioridade) {
+      params = params.set(
+        'prioridade',
+        filtro.prioridade
+      );
+    }
 
-  //   return this.http.get<PaginatedResponse<Person>>(
-  //     this.apiUrl,
-  //     { params }
-  //   );
-  // }
+    if (filtro?.bairro) {
+      params = params.set('bairro', filtro.bairro);
+    }
 
+    if (filtro?.status) {
+      params = params.set('status', filtro.status);
+    }
 
-  // create(data: any): Observable<Person> {
-  //   return this.http.post<Person>(
-  //     this.apiUrl,
-  //     data
-  //   );
-  // }
+    if (filtro?.prioridade) {
+      params = params.set('prioridade', filtro.prioridade);
+    }
+
+    return this.http.get<PaginatedResponse<DemandStreet>>(
+      this.apiUrl,
+      { params }
+    );
+  }
 
   importarPlanilha(arquivo: File) {
 

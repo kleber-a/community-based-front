@@ -4,7 +4,16 @@
     <header class="modal-header">
       <div class="modal-header__meta">
         <span class="modal-header__kicker">Pessoa da Comunidade</span>
-        <h2 class="modal-header__name">{{ data.nome }}</h2>
+        <!-- <h2 class="modal-header__name">{{ data.nome }}</h2> -->
+        <h2 class="modal-header__name">
+
+          <ng-container *ngIf="!editando">
+            {{ data.nome }}
+          </ng-container>
+
+          <input *ngIf="editando" [(ngModel)]="form.nome">
+
+        </h2>
       </div>
       <button class="modal-close" (click)="close()" aria-label="Fechar">✕</button>
     </header>
@@ -19,17 +28,30 @@
             <span class="modal-field__label">Nome</span>
             <span class="modal-field__value">{{ data.nome || '—' }}</span>
           </div> -->
+
           <div class="modal-field">
-            <span class="modal-field__label">CPF</span>
-            <span class="modal-field__value">{{ data.cpf ? formatCpf(data.cpf) : '—' }}</span>
+            <!-- <span class="modal-field__label">CPF</span>
+            <span class="modal-field__value">{{ data.cpf ? formatCpf(data.cpf) : '—' }}</span> -->
+            <ng-container *ngIf="!editando">
+              <span class="modal-field__value">
+                {{ data.cpf ? formatCpf(data.cpf) : '—' }}
+              </span>
+            </ng-container>
+            <input *ngIf="editando" [(ngModel)]="form.cpf" />
           </div>
           <div class="modal-field">
             <span class="modal-field__label">Data de Nascimento</span>
             <span class="modal-field__value">{{ (data.dataNascimento | date:'dd/MM/yyyy') || '—' }}</span>
           </div>
           <div class="modal-field">
-            <span class="modal-field__label">Telefone</span>
-            <span class="modal-field__value">{{ data.telefone ? formatPhone(data.telefone) : '—' }}</span>
+            <!-- <span class="modal-field__label">Telefone</span>
+            <span class="modal-field__value">{{ data.telefone ? formatPhone(data.telefone) : '—' }}</span> -->
+            <ng-container *ngIf="!editando">
+              <span class="modal-field__value">
+                {{ data.telefone ? formatPhone(data.telefone) : '—' }}
+              </span>
+            </ng-container>
+            <input *ngIf="editando" [(ngModel)]="form.telefone" />
           </div>
           <div class="modal-field">
             <span class="modal-field__label">Facebook</span>
@@ -148,8 +170,15 @@
     </div>
 
     <footer class="modal-footer">
-      <button class="btn btn--ghost" (click)="close()">Fechar</button>
-      <button class="btn btn--primary">Editar cadastro</button>
+      <!-- <button class="btn btn--ghost" (click)="close()">Fechar</button>
+      <button class="btn btn--primary">Editar cadastro</button> -->
+      <button class="btn btn--primary" (click)="editar()" *ngIf="!editando">
+        Editar cadastro
+      </button>
+
+      <button class="btn btn--primary" (click)="salvar()" *ngIf="editando">
+        Salvar alterações
+      </button>
     </footer>
 
   </div>
