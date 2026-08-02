@@ -1,7 +1,7 @@
 <div class="page-content">
 
-  <app-page-header kicker="Pessoas da Comunidade" title="Pessoas da Comunidade" importButtonLabel="demands"
-    subtitle="Cadastro e classificação do eleitorado" actionLabel="Cadastrar" actionIcon="+" />
+  <app-page-header kicker="Demandas de Rua" title="Demandas de Rua" importButtonLabel="demands"
+    subtitle="Cadastro e acompanhamento das demandas" actionLabel="Cadastrar" actionIcon="+" />
 
   <section class="demand-toolbar">
 
@@ -13,30 +13,55 @@
 
     <select [(ngModel)]="filtro.status" (change)="aplicarFiltros()">
 
-      <option value="">Todos os status</option>
-      <option value="PENDENTE">Pendente</option>
-      <option value="EM_ANDAMENTO">Em andamento</option>
-      <option value="RESOLVIDO">Resolvido</option>
+      <option value="">
+        Todos os status
+      </option>
+
+      <option value="PENDENTE">
+        Pendente
+      </option>
+
+      <option value="EM_ANDAMENTO">
+        Em andamento
+      </option>
+
+      <option value="RESOLVIDO">
+        Resolvido
+      </option>
 
     </select>
 
     <select [(ngModel)]="filtro.prioridade" (change)="aplicarFiltros()">
 
-      <option value="">Todas prioridades</option>
-      <option value="BAIXA">Baixa</option>
-      <option value="MEDIA">Média</option>
-      <option value="ALTA">Alta</option>
-      <option value="URGENTE">Urgente</option>
+      <option value="">
+        Todas as prioridades
+      </option>
+
+      <option value="BAIXA">
+        Baixa
+      </option>
+
+      <option value="MEDIA">
+        Média
+      </option>
+
+      <option value="ALTA">
+        Alta
+      </option>
+
+      <option value="URGENTE">
+        Urgente
+      </option>
 
     </select>
 
-    <button class="search-button" (click)="aplicarFiltros()">
+    <button class="search-button" type="button" (click)="aplicarFiltros()">
 
       Buscar
 
     </button>
 
-    <button class="clear-button" (click)="limparFiltros()">
+    <button class="clear-button" type="button" (click)="limparFiltros()">
 
       Limpar
 
@@ -45,60 +70,131 @@
   </section>
 
   <section class="demand-grid">
-    @for (demand of demandas; track demand.id) {
-    <article class="demand-card">
+
+    @for (
+    demand of demandas;
+    track demand.id
+    ) {
+
+    <article class="demand-card" role="button" tabindex="0" (click)="openModal(demand)"
+      (keydown.enter)="openModal(demand)">
+
       <div class="demand-card__top">
-        <!-- <div class="demand-card__icon" aria-hidden="true">{{ demand.icon }}</div> -->
+
         <div class="demand-card__icon">
-          {{ getIcon(demand.orgaoResponsavel) }}
+
+          {{ getIcon(
+          demand.orgaoResponsavel
+          ) }}
+
         </div>
-        <span class="demand-status" [class.status--open]="demand.status === 'PENDENTE'"
-          [class.status--progress]="demand.status === 'EM_ANDAMENTO'"
-          [class.status--done]="demand.status === 'RESOLVIDO'">
+
+        <span class="demand-status" [class.status--open]="
+              demand.status === 'PENDENTE'
+            " [class.status--progress]="
+              demand.status ===
+              'EM_ANDAMENTO'
+            " [class.status--done]="
+              demand.status ===
+              'RESOLVIDO'
+            ">
 
           {{ demand.status }}
 
         </span>
+
       </div>
 
-      <h2>{{ demand.titulo }}</h2>
+      <h2>
+
+        {{ demand.titulo }}
+
+      </h2>
+
       <p class="demand-meta">
-        {{ demand.bairro }} • {{ demand.rua }}
+
+        {{ demand.bairro || 'Bairro não informado' }}
+
+        •
+
+        {{ demand.rua || 'Rua não informada' }}
+
       </p>
 
       <div class="demand-tags">
+
         <span class="tag">
-          {{ demand.orgaoResponsavel }}
+
+          {{
+          demand.orgaoResponsavel
+          || 'Órgão não informado'
+          }}
+
         </span>
 
         <span class="tag tag--deadline">
-          {{ demand.dataSolicitacao | date:'dd/MM/yyyy' }}
-        </span>
-      </div>
-      <!-- <div class="demand-tags">
-        <span class="tag">{{ demand.department }}</span>
-        <span class="tag tag--deadline">Prazo: {{ demand.deadline }}</span>
-      </div> -->
 
-      <button type="button" class="advance-button">Avançar status</button>
+          @if (
+          demand.dataSolicitacao
+          ) {
+
+          {{
+          demand.dataSolicitacao
+          | date:'dd/MM/yyyy'
+          }}
+
+          } @else {
+
+          Sem data
+
+          }
+
+        </span>
+
+      </div>
+
+      <button type="button" class="advance-button" (click)="
+            $event.stopPropagation()
+          ">
+
+        Avançar status
+
+      </button>
+
     </article>
+
     }
+
   </section>
+
 </div>
 
 <div class="pagination">
 
-  <button (click)="page = page - 1; buscarDemandas()" [disabled]="page === 1">
+  <button type="button" (click)="
+      page = page - 1;
+      buscarDemandas()
+    " [disabled]="page === 1">
 
     Anterior
 
   </button>
 
   <span>
-    Página {{ page }} de {{ totalPages }}
+
+    Página
+    {{ page }}
+    de
+    {{ totalPages }}
+
   </span>
 
-  <button (click)="page = page + 1; buscarDemandas()" [disabled]="page === totalPages">
+  <button type="button" (click)="
+      page = page + 1;
+      buscarDemandas()
+    " [disabled]="
+      page === totalPages
+    ">
 
     Próxima
 

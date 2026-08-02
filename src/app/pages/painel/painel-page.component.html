@@ -1,4 +1,4 @@
-<app-page-header
+<!-- <app-page-header
 			kicker="Painel"
 			title="Visão geral da campanha"
 			subtitle="Acompanhe os principais números, prioridades e movimentos do dia."
@@ -115,4 +115,506 @@
 				</div>
 			</article>
 		</section>
-  </div>
+  </div> -->
+
+
+<app-page-header kicker="Painel" title="Visão geral da campanha"
+  subtitle="Acompanhe os principais números, prioridades e movimentos do dia." actionLabel="Nova ação" actionIcon="+" />
+
+<div class="page-content">
+
+  <!-- CARDS DE RESUMO -->
+
+  <section class="summary-grid">
+
+
+    @for (card of summaryCards; track card.label) {
+
+    <article class="summary-card" [class.summary-card--mint]="card.variant === 'mint'"
+      [class.summary-card--cyan]="card.variant === 'cyan'" [class.summary-card--amber]="card.variant === 'amber'"
+      [class.summary-card--green]="card.variant === 'green'">
+
+      <div class="summary-card__icon" aria-hidden="true">
+        {{ card.icon }}
+      </div>
+
+      <div>
+
+        <strong>
+          {{ card.value }}
+        </strong>
+
+        <span class="summary-label">
+          {{ card.label }}
+        </span>
+
+        <p>
+          {{ card.description }}
+        </p>
+
+      </div>
+
+    </article>
+
+    }
+
+
+  </section>
+
+  <!-- MENSAGEM DE ERRO -->
+
+  @if (error) {
+
+
+  <section class="dashboard-error">
+
+    <span>
+      ⚠️
+    </span>
+
+    <div>
+
+      <strong>
+        Não foi possível carregar o painel
+      </strong>
+
+      <p>
+        Verifique se o servidor está funcionando e tente novamente.
+      </p>
+
+    </div>
+
+    <button type="button" (click)="carregarDashboard()">
+      Tentar novamente
+    </button>
+
+  </section>
+
+
+  }
+
+  <!-- CONTEÚDO PRINCIPAL -->
+
+  <section class="dashboard-grid">
+
+
+    <!-- PESSOAS POR BAIRRO -->
+    <article class="chart-card chart-card--wide">
+
+      <header class="section-header">
+
+        <div>
+
+          <h2>
+            Pessoas por bairro
+          </h2>
+
+          <p>
+            Bairros com mais pessoas cadastradas
+          </p>
+
+        </div>
+
+      </header>
+
+
+      @if (loading) {
+
+      <div class="dashboard-loading">
+
+        Carregando bairros...
+
+      </div>
+
+      } @else if (supportBars.length === 0) {
+
+      <div class="dashboard-empty">
+
+        <span>
+          🏘️
+        </span>
+
+        <strong>
+          Nenhum bairro encontrado
+        </strong>
+
+        <p>
+          Os bairros aparecerão conforme novas pessoas forem cadastradas.
+        </p>
+
+      </div>
+
+      } @else {
+
+      <div class="bar-chart">
+
+        @for (
+        bairro of supportBars;
+        track bairro.bairro
+        ) {
+
+        <div class="bar-chart__row">
+
+          <span class="bar-chart__label">
+
+            {{ bairro.bairro }}
+
+          </span>
+
+
+          <div class="bar-chart__track">
+
+            <div class="bar-chart__bar" [style.width.%]="
+                getLarguraBarra(
+                  bairro.quantidade
+                )
+              "></div>
+
+          </div>
+
+
+          <span class="bar-chart__value">
+
+            {{ bairro.quantidade }}
+
+          </span>
+
+        </div>
+
+        }
+
+      </div>
+
+      }
+
+    </article>
+
+
+
+    <!-- BAIRROS EM DESTAQUE -->
+    <article class="chart-card chart-card--side">
+
+      <header class="section-header">
+
+        <div>
+
+          <h2>
+            Bairros em destaque
+          </h2>
+
+          <p>
+            Regiões com mais pessoas cadastradas
+          </p>
+
+        </div>
+
+      </header>
+
+
+      @if (loading) {
+
+      <div class="dashboard-loading">
+
+        Carregando informações...
+
+      </div>
+
+      } @else if (opportunities.length === 0) {
+
+      <div class="dashboard-empty dashboard-empty--small">
+
+        <span>
+          📍
+        </span>
+
+        <strong>
+          Nenhuma informação encontrada
+        </strong>
+
+      </div>
+
+      } @else {
+
+      <div class="opportunity-list">
+
+        @for (
+        item of opportunities;
+        track item.name
+        ) {
+
+        <div class="opportunity-item">
+
+          <div class="opportunity-item__rank">
+
+            {{ item.position }}
+
+          </div>
+
+
+          <div class="opportunity-item__content">
+
+            <strong>
+
+              {{ item.name }}
+
+            </strong>
+
+
+            <span>
+
+              {{ item.description }}
+
+            </span>
+
+          </div>
+
+
+          <span class="opportunity-item__badge">
+
+            {{ item.badge }}
+
+          </span>
+
+        </div>
+
+        }
+
+      </div>
+
+      }
+
+    </article>
+
+
+
+    <!-- DEMANDAS RECENTES -->
+    <article class="list-card">
+
+      <header class="section-header">
+
+        <div>
+
+          <h2>
+            Demandas recentes
+          </h2>
+
+          <p>
+            Últimos pedidos registrados
+          </p>
+
+        </div>
+
+      </header>
+
+
+      @if (loading) {
+
+      <div class="dashboard-loading">
+
+        Carregando demandas...
+
+      </div>
+
+      } @else if (recentDemands.length === 0) {
+
+      <div class="dashboard-empty">
+
+        <span>
+          🧾
+        </span>
+
+        <strong>
+          Nenhuma demanda encontrada
+        </strong>
+
+        <p>
+          As novas demandas aparecerão aqui.
+        </p>
+
+      </div>
+
+      } @else {
+
+      <div class="demand-list">
+
+        @for (
+        demand of recentDemands;
+        track demand.id
+        ) {
+
+        <div class="demand-item">
+
+          <div class="demand-item__content">
+
+            <strong>
+
+              {{ demand.title }}
+
+            </strong>
+
+
+            <p>
+
+              {{ demand.meta }}
+
+            </p>
+
+          </div>
+
+
+          <span class="demand-pill" [class.status--open]="
+              demand.statusClass === 'status--open'
+            " [class.status--progress]="
+              demand.statusClass === 'status--progress'
+            " [class.status--done]="
+              demand.statusClass === 'status--done'
+            ">
+
+            {{ demand.status }}
+
+          </span>
+
+        </div>
+
+        }
+
+      </div>
+
+      }
+
+    </article>
+
+
+
+    <!-- ANIVERSARIANTES -->
+    <article class="list-card birthday-card">
+
+      <header class="section-header">
+
+        <div>
+
+          <h2>
+            🎂 Aniversariantes do dia
+          </h2>
+
+          <p>
+
+            @if (aniversariantes.length === 1) {
+
+            1 pessoa faz aniversário hoje
+
+            } @else {
+
+            {{ aniversariantes.length }}
+            pessoas fazem aniversário hoje
+
+            }
+
+          </p>
+
+        </div>
+
+      </header>
+
+
+      @if (loading) {
+
+      <div class="dashboard-loading">
+
+        Buscando aniversariantes...
+
+      </div>
+
+      } @else if (aniversariantes.length === 0) {
+
+      <div class="dashboard-empty">
+
+        <span>
+          🎉
+        </span>
+
+        <strong>
+          Nenhum aniversariante hoje
+        </strong>
+
+        <p>
+          Não há pessoas cadastradas fazendo aniversário nesta data.
+        </p>
+
+      </div>
+
+      } @else {
+
+      <div class="birthday-list">
+
+        @for (
+        pessoa of aniversariantes;
+        track pessoa.nome
+        ) {
+
+        <div class="birthday-item">
+
+
+          <!-- AVATAR -->
+          <div class="birthday-avatar">
+
+            {{
+            pessoa.nome
+            .charAt(0)
+            .toUpperCase()
+            }}
+
+          </div>
+
+
+          <!-- DADOS -->
+          <div class="birthday-item__content">
+
+            <strong>
+
+              {{ pessoa.nome }}
+
+            </strong>
+
+
+            <span>
+
+              📍
+
+              {{
+              pessoa.bairro
+              || 'Bairro não informado'
+              }}
+
+            </span>
+
+          </div>
+
+
+          <!-- TELEFONE -->
+          @if (pessoa.telefone) {
+
+          <div class="birthday-item__age">
+
+            📞
+
+            {{ pessoa.telefone }}
+
+          </div>
+
+          }
+
+        </div>
+
+        }
+
+      </div>
+
+      }
+
+    </article>
+
+
+  </section>
+
+</div>

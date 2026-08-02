@@ -55,6 +55,51 @@ export class DemandStreetService {
     );
   }
 
+  update(
+
+    id:
+      string,
+
+    payload:
+      Record<
+        string,
+        unknown
+      >,
+
+  ): Observable<
+    DemandStreet
+  > {
+
+    return this.http.patch<
+      DemandStreet
+    >(
+
+      `${this.apiUrl}/${id}`,
+
+      payload,
+
+    );
+
+  }
+
+  adicionarSolicitante(
+    demandaId: string,
+    pessoasIds: string[],
+  ) {
+
+    return this.http.patch<DemandStreet>(
+
+      `${this.apiUrl}/${demandaId}/solicitantes`,
+
+      {
+        pessoasIds,
+      },
+
+    );
+
+  }
+
+
   importarPlanilha(arquivo: File) {
 
     const formData = new FormData();

@@ -1,0 +1,552 @@
+<div class="modal">
+
+  <header class="modal-header">
+
+    <div>
+
+      <span class="modal-header__kicker">
+
+        Demanda de Rua
+
+      </span>
+
+      <h2>
+
+        Editar demanda
+
+      </h2>
+
+    </div>
+
+    <button type="button" class="close-button" aria-label="Fechar modal" (click)="fechar()">
+
+      ×
+
+    </button>
+
+  </header>
+
+  <div class="modal-body">
+
+    <div class="form-group
+             form-group--full">
+
+      <label>
+
+        Título
+
+      </label>
+
+      <input type="text" name="titulo" [(ngModel)]="
+          form.titulo
+        ">
+
+    </div>
+
+    <div class="form-group
+             form-group--full">
+
+      <label>
+
+        Descrição
+
+      </label>
+
+      <textarea rows="4" name="descricao" [(ngModel)]="
+          form.descricao
+        "></textarea>
+
+    </div>
+
+    <div class="form-group">
+
+      <label>
+
+        Status
+
+      </label>
+
+      <select name="status" [(ngModel)]="
+          form.status
+        ">
+
+        <option value="PENDENTE">
+
+          Pendente
+
+        </option>
+
+        <option value="EM_ANDAMENTO">
+
+          Em andamento
+
+        </option>
+
+        <option value="RESOLVIDO">
+
+          Resolvido
+
+        </option>
+
+      </select>
+
+    </div>
+
+    <div class="form-group">
+
+      <label>
+
+        Prioridade
+
+      </label>
+
+      <select name="prioridade" [(ngModel)]="
+          form.prioridade
+        ">
+
+        <option value="BAIXA">
+
+          Baixa
+
+        </option>
+
+        <option value="MEDIA">
+
+          Média
+
+        </option>
+
+        <option value="ALTA">
+
+          Alta
+
+        </option>
+
+        <option value="URGENTE">
+
+          Urgente
+
+        </option>
+
+      </select>
+
+    </div>
+
+    <div class="form-group">
+
+      <label>
+
+        Órgão responsável
+
+      </label>
+
+      <input type="text" name="orgaoResponsavel" [(ngModel)]="
+          form.orgaoResponsavel
+        ">
+
+    </div>
+
+    <div class="form-group">
+
+      <label>
+
+        Protocolo
+
+      </label>
+
+      <input type="text" name="protocolo" [(ngModel)]="
+          form.protocolo
+        ">
+
+    </div>
+
+    <div class="form-group">
+
+      <label>
+
+        Data da solicitação
+
+      </label>
+
+      <input type="date" name="dataSolicitacao" [(ngModel)]="
+          form.dataSolicitacao
+        ">
+
+    </div>
+
+    <div class="form-group">
+
+      <label>
+
+        Data prevista
+
+      </label>
+
+      <input type="date" name="dataPrevisao" [(ngModel)]="
+          form.dataPrevisao
+        ">
+
+    </div>
+
+    <div class="form-group">
+
+      <label>
+
+        Data de finalização
+
+      </label>
+
+      <input type="date" name="dataFinalizacao" [(ngModel)]="
+          form.dataFinalizacao
+        ">
+
+    </div>
+
+    <div class="form-group
+             form-group--full">
+
+      <h3>
+
+        Endereço
+
+      </h3>
+
+    </div>
+
+    <div class="form-group">
+
+      <label>
+
+        Rua
+
+      </label>
+
+      <input type="text" name="rua" [(ngModel)]="
+          form.rua
+        ">
+
+    </div>
+
+    <div class="form-group">
+
+      <label>
+
+        Número
+
+      </label>
+
+      <input type="text" name="numero" [(ngModel)]="
+          form.numero
+        ">
+
+    </div>
+
+    <div class="form-group
+             form-group--full">
+
+      <label>
+
+        Complemento
+
+      </label>
+
+      <input type="text" name="complemento" [(ngModel)]="
+          form.complemento
+        ">
+
+    </div>
+
+    <div class="form-group">
+
+      <label>
+
+        Bairro
+
+      </label>
+
+      <input type="text" name="bairro" [(ngModel)]="
+          form.bairro
+        ">
+
+    </div>
+
+    <div class="form-group">
+
+      <label>
+
+        CEP
+
+      </label>
+
+      <input type="text" name="cep" [(ngModel)]="
+          form.cep
+        ">
+
+    </div>
+
+    <div class="form-group">
+
+      <label>
+
+        Cidade
+
+      </label>
+
+      <input type="text" name="cidade" [(ngModel)]="
+          form.cidade
+        ">
+
+    </div>
+
+    <div class="form-group">
+
+      <label>
+
+        UF
+
+      </label>
+
+      <input type="text" maxlength="2" name="uf" [(ngModel)]="
+          form.uf
+        ">
+
+    </div>
+
+    <div class="form-group
+             form-group--full">
+
+      <label>
+
+        Ponto de referência
+
+      </label>
+
+      <input type="text" name="referencia" [(ngModel)]="
+          form.referencia
+        ">
+
+    </div>
+
+    <div class="form-group
+             form-group--full">
+
+      <label>
+
+        Descrição do status
+
+      </label>
+
+      <textarea rows="3" name="descricaoStatus" [(ngModel)]="
+          form.descricaoStatus
+        "></textarea>
+
+    </div>
+
+    <div class="form-group
+             form-group--full">
+
+      <label>
+
+        Observação interna
+
+      </label>
+
+      <textarea rows="3" name="observacaoInterna" [(ngModel)]="
+          form.observacaoInterna
+        "></textarea>
+
+    </div>
+
+    <section class="solicitantes-section">
+
+      <div class="solicitantes-header">
+
+        <div>
+
+          <span>
+
+            Pessoas vinculadas
+
+          </span>
+
+          <h3>
+
+            Solicitantes
+
+          </h3>
+
+        </div>
+
+        <strong>
+
+          {{ solicitantes.length }}
+
+        </strong>
+
+      </div>
+
+      <div class="adicionar-solicitante">
+
+        <div class="cpf-input">
+
+          <label for="cpfSolicitante">
+
+            CPF do solicitante
+
+          </label>
+
+          <input id="cpfSolicitante" type="text" name="cpfSolicitante" placeholder="000.000.000-00" [(ngModel)]="
+          cpfSolicitante
+        " (keyup.enter)="
+          adicionarSolicitante()
+        ">
+
+        </div>
+
+        <button type="button" class="add-button" [disabled]="
+        buscandoSolicitante
+      " (click)="
+        adicionarSolicitante()
+      ">
+
+          @if (
+          buscandoSolicitante
+          ) {
+
+          Adicionando...
+
+          } @else {
+
+          Adicionar
+
+          }
+
+        </button>
+
+      </div>
+
+      @if (
+      mensagemSolicitante
+      ) {
+
+      <div class="solicitante-message" [class.message-success]="
+        tipoMensagemSolicitante
+        === 'success'
+      " [class.message-error]="
+        tipoMensagemSolicitante
+        === 'error'
+      ">
+
+        {{ mensagemSolicitante }}
+
+      </div>
+
+      }
+
+      @if (
+      solicitantes.length > 0
+      ) {
+
+      <div class="solicitantes-list">
+
+        @for (
+        solicitante of solicitantes;
+        track solicitante.pessoaId
+        ) {
+
+        <article class="solicitante-card">
+
+          <div class="solicitante-avatar">
+
+            {{
+            solicitante.pessoa?.nome
+            ?.charAt(0)
+            ?.toUpperCase()
+            || '?'
+            }}
+
+          </div>
+
+          <div class="solicitante-info">
+
+            <strong>
+
+              {{
+              solicitante.pessoa?.nome
+              || 'Pessoa não encontrada'
+              }}
+
+            </strong>
+
+            <span>
+
+              CPF:
+
+              {{
+              solicitante.pessoa?.cpf
+              || 'Não informado'
+              }}
+
+            </span>
+
+            @if (
+            solicitante.pessoa?.telefone
+            ) {
+
+            <span>
+
+              {{
+              solicitante.pessoa?.telefone
+              }}
+
+            </span>
+
+            }
+
+          </div>
+
+        </article>
+
+        }
+
+      </div>
+
+      } @else {
+
+      <div class="sem-solicitantes">
+
+        Nenhum solicitante vinculado.
+
+      </div>
+
+      }
+
+    </section>
+
+  </div>
+
+  <footer class="modal-footer">
+
+    <button type="button" class="cancel-button" [disabled]="salvando" (click)="fechar()">
+
+      Cancelar
+
+    </button>
+
+    <button type="button" class="save-button" [disabled]="salvando" (click)="salvar()">
+
+      @if (salvando) {
+
+      Salvando...
+
+      } @else {
+
+      Salvar alterações
+
+      }
+
+    </button>
+
+  </footer>
+
+</div>
